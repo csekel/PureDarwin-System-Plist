@@ -9,7 +9,7 @@
 	</array>
 	
 	<key>build</key>
-	<string>15G31pd1</string>
+	<string>16D32pd1</string>
 	
 	<key>darwin</key>
 	<string>Darwin 16.4</string>
@@ -63,8 +63,8 @@
 	</dict>
 
 	<key>projects</key>
-
 	<dict>
+		
 		<key>CoreOSMakefiles</key>
 		<dict>
 			<key>version</key>
