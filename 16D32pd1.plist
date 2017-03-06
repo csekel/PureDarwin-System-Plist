@@ -95,6 +95,24 @@
 			<key>version</key>
 			<string>800.0.42.1</string>
 		</dict>
+	    <key>libcxx</key>
+        <dict>
+           	<key>original</key>
+			<string>clang</string>
+            <key>version</key>
+            <string>800.0.42.1</string>
+			<!--string>120.0.0</string-->
+        </dict>
+
+        <key>libcxx_static</key>
+            <dict>
+			<key>original</key>
+			<string>libcxx</string>
+            <key>target</key>
+            <string>libcxx_eOS</string>
+			<key>version</key>
+			<string>800.0.42.1</string>
+		</dict>
 		<key>developer_cmds</key>
 		<dict>
 			<key>version</key>
@@ -595,6 +613,45 @@
 			<key>version</key>
 			<string>52</string>
 		</dict>
+		<key>ctfconvert</key>
+		<dict>
+			<key>original</key>
+			<string>dtrace</string>
+			<key>target</key>
+			<string>ctfconvert</string>
+			<key>version</key>
+			<string>209.20.4</string>
+		</dict>
+		
+		<key>ctfdump</key>
+		<dict>
+			<key>original</key>
+			<string>dtrace</string>
+			<key>target</key>
+			<string>ctfdump</string>
+			<key>version</key>
+			<string>209.20.4</string>
+		</dict>
+		
+		<key>ctfmerge</key>
+		<dict>
+			<key>original</key>
+			<string>dtrace</string>
+			<key>target</key>
+			<string>ctfmerge</string>
+			<key>version</key>
+			<string>209.20.4</string>
+		</dict>		
+
+		<key>ctftools</key>
+		<dict>
+				<key>original</key>
+				<string>dtrace</string>
+				<key>target</key>
+				<string>ctftools</string>
+				<key>version</key>
+				<string>209.20.4</string>
+		</dict>
 		<key>cups</key>
 		<dict>
 			<key>version</key>
@@ -762,6 +819,22 @@
 		</dict>
 		<key>libdispatch</key>
 		<dict>
+			<key>dependencies</key>
+			<dict>
+				<key>build</key>
+				<array>
+					<string>xnu</string>
+				</array>
+				<key>header</key>
+				<array>
+					<string>xnu</string>
+					<string>libpthread</string>
+					<string>libplatform</string>
+					<string>libclosure</string>
+					<string>objc4</string>
+					<string>libauto</string>
+				</array>
+			</dict>
 			<key>version</key>
 			<string>703.30.5</string>
 		</dict>
@@ -1152,9 +1225,40 @@
 		</dict>
 		<key>xnu</key>
 		<dict>
+			<key>environment</key>
+			<dict>
+				<key>SDKROOT</key>
+				<string>macosx10.12</string>
+				<key>KERNEL_CONFIGS</key>
+				<string>RELEASE</string>
+			</dict>
 			<key>version</key>
 			<string>3789.41.3</string>
 		</dict>
+
+                <key>libkxld</key>
+                <dict>
+			<!--key>alias</key>
+			<string>libkxld</string-->
+                        <key>original</key>
+                        <string>xnu</string>
+                        <key>environment</key>
+                        <dict>
+                           <key>SDKROOT</key>
+                           <string>macosx10.12</string>
+                           <key>RC_ARCHS</key>
+                           <string>x86_64</string>
+                           <key>KERNEL_CONFIGS</key>
+                           <string>RELEASE</string>
+                        </dict>
+                        <key>version</key>
+                        <string>3789.41.3</string>
+                </dict>
+
+
+
+
+
 		<key>zip</key>
 		<dict>
 			<key>version</key>
