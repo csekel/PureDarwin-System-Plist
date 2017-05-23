@@ -1383,6 +1383,13 @@
 			</dict>
 			<key>version</key>
 			<string>3789.51.2</string>
+			<key>dependencies</key>
+			<dict>
+				<key>build</key>
+				<array>
+					<string>dtrace_ctftools</string>
+				</array>
+			</dict>
 		</dict>
 		<key>libkxld</key>
 		<dict>
