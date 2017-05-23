@@ -735,12 +735,14 @@
 			<key>version</key>
 			<string>209.50.12</string>
 		</dict>
-		<key>dtrace_ctftools</key>
+		<key>dtrace_host</key>
 		<dict>
 			<key>original</key>
 			<string>dtrace</string>
 			<key>target</key>
 			<string>dtrace_host</string>
+			<key>version</key>
+			<string>209.50.12</string>
 		</dict>
 		<key>dyld</key>
 		<dict>
@@ -1387,7 +1389,8 @@
 			<dict>
 				<key>build</key>
 				<array>
-					<string>dtrace_ctftools</string>
+					<string>AvailabilityVersions</string>
+					<string>dtrace_host</string>
 				</array>
 			</dict>
 		</dict>
