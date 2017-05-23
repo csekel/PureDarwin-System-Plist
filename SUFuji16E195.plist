@@ -10,6 +10,7 @@
 	<key>patch_sites</key>
 	<array>
 		<string>http://67.205.155.153/Patches</string>
+		<string>https://github.com/Andromeda-OS/darwinbuild/raw/master/patches</string>
 	</array>
 
 	<key>build</key>
@@ -195,6 +196,10 @@
 		<dict>
 			<key>version</key>
 			<string>26.50.4</string>
+			<key>patchfiles</key>
+			<array>
+				<string>AvailabilityVersions-26.50.4.install-location.p1.patch</string>
+			</array>
 		</dict>
 		<key>BerkeleyDB</key>
 		<dict>
@@ -923,6 +928,7 @@
 			<key>patchfiles</key>
 			<array>
 				<string>libdispatch-703.50.37.p1.patch</string>
+				<string>libdispatch-703.50.37.libfirehose.patch</string>
 			</array>
 			<key>version</key>
 			<string>703.50.37</string>
@@ -1405,6 +1411,10 @@
 					<string>AvailabilityVersions</string>
 				</array>
 			</dict>
+			<key>patchfiles</key>
+			<array>
+				<string>xnu-3789.51.2.fix-path.patch</string>
+			</array>
 		</dict>
 		<key>libkxld</key>
 		<dict>
