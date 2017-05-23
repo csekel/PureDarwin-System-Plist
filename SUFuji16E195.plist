@@ -913,6 +913,13 @@
 			<string>libdispatch</string>
 			<key>target</key>
 			<string>libfirehose_kernel</string>
+			<key>dependencies</key>
+			<dict>
+				<key>header</key>
+				<array>
+					<string>xnu</string>
+				</array>
+			</dict>
 			<key>patchfiles</key>
 			<array>
 				<string>libdispatch-703.50.37.p1.patch</string>
@@ -1391,6 +1398,11 @@
 				<array>
 					<string>AvailabilityVersions</string>
 					<string>dtrace_host</string>
+					<string>libfirehose_kernel</string>
+				</array>
+				<key>header</key>
+				<array>
+					<string>AvailabilityVersions</string>
 				</array>
 			</dict>
 		</dict>
