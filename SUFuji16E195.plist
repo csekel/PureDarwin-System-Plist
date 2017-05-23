@@ -14,13 +14,13 @@
 
 	<key>build</key>
 	<string>SUFuji16E195</string>
-	
+
 	<key>darwin</key>
 	<string>Darwin 16.5</string>
-	
+
 	<key>macosx</key>
 	<string>macOS 10.12.4</string>
-	
+
 	<key>environment</key>
 	<dict>
 		<key>INSTALLED_PRODUCT_ASIDES</key>
@@ -57,7 +57,7 @@
 		<string>macosx10.12</string>
 
 	</dict>
-			
+
 	<key>groups</key>
 	<dict>
 		<key>compilertools</key>
@@ -156,7 +156,7 @@
 		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>AppleRAID-8.50.1.noMediaKit.p1.patch</string>
+				<string>AppleRAID-8.50.1.noMediaKit.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>8.50.1</string>
@@ -347,10 +347,10 @@
 			<string>3.1</string>
 		</dict>
 		<key>IOKitUser</key>
-		<dict> 
+		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>IOKitUser-1324.50.21.nohidevent.patch</string>
+				<string>IOKitUser-1324.50.21.nohidevent.patch</string>
 			</array>
 			<key>version</key>
 			<string>1324.50.21</string>
@@ -404,7 +404,7 @@
 		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>Libc-1158.50.2.p1.patch</string>
+				<string>Libc-1158.50.2.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>1158.50.2</string>
@@ -413,7 +413,7 @@
 		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>Libinfo-503.50.4.p1.patch</string>
+				<string>Libinfo-503.50.4.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>503.50.4</string>
@@ -432,7 +432,7 @@
 		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>Libsystem-1238.51.1.p1.patch</string>
+				<string>Libsystem-1238.51.1.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>1238.51.1</string>
@@ -451,7 +451,7 @@
 		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>Libm-2026.p1.patch</string>
+				<string>Libm-2026.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>2026</string>
@@ -605,7 +605,7 @@
 		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>bash-103.50.1.p1.patch</string>
+				<string>bash-103.50.1.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>103.50.1</string>
@@ -865,12 +865,12 @@
 			<string>67</string>
 		</dict>
 		<key>libcxx</key>
-        <dict>
-            <key>version</key>
-            <string>800.0.42.1</string>
-        </dict>
-        <key>libcxx_static</key>
-            <dict>
+		<dict>
+			<key>version</key>
+			<string>800.0.42.1</string>
+		</dict>
+		<key>libcxx_static</key>
+		<dict>
 			<key>original</key>
 			<string>libcxx</string>
 			<key>version</key>
@@ -880,33 +880,33 @@
 		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>libdispatch-703.50.37.p1.patch</string>
+				<string>libdispatch-703.50.37.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>703.50.37</string>
 		</dict>
 		<key>libfirehose_server</key>
 		<dict>
-		<key>original</key>
-		<string>libdispatch</string>
-		<key>target</key>
-		<string>libfirehose_server</string>
+			<key>original</key>
+			<string>libdispatch</string>
+			<key>target</key>
+			<string>libfirehose_server</string>
 			<key>patchfiles</key>
 			<array>
-			<string>libdispatch-703.50.37.p1.patch</string>
+				<string>libdispatch-703.50.37.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>703.50.37</string>
 		</dict>
 		<key>libfirehose_kernel</key>
 		<dict>
-		<key>original</key>
-		<string>libdispatch</string>
-		<key>target</key>
-		<string>libfirehose_kernel</string>
+			<key>original</key>
+			<string>libdispatch</string>
+			<key>target</key>
+			<string>libfirehose_kernel</string>
 			<key>patchfiles</key>
 			<array>
-			<string>libdispatch-703.50.37.p1.patch</string>
+				<string>libdispatch-703.50.37.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>703.50.37</string>
@@ -955,26 +955,26 @@
 		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>libplatform-126.50.8.p1.patch</string>
+				<string>libplatform-126.50.8.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>126.50.8</string>
 		</dict>
 		<key>libplatform_dyld</key>
 		<dict>
-		<key>original</key>
-		<string>libplatform</string>
-		<key>target</key>
-		<string>libplatform dyld</string>
+			<key>original</key>
+			<string>libplatform</string>
+			<key>target</key>
+			<string>libplatform dyld</string>
 			<key>version</key>
 			<string>126.50.8</string>
 		</dict>
 		<key>libplatform_static</key>
 		<dict>
-		<key>original</key>
-		<string>libplatform</string>
-		<key>target</key>
-		<string>libplatform static</string>
+			<key>original</key>
+			<string>libplatform</string>
+			<key>target</key>
+			<string>libplatform static</string>
 			<key>version</key>
 			<string>126.50.8</string>
 		</dict>
@@ -985,37 +985,37 @@
 		</dict>
 		<key>pthread_kext</key>
 		<dict>
-		<key>original</key>
-		<string>libpthread</string>
-		<key>target</key>
-		<string>pthread</string>
+			<key>original</key>
+			<string>libpthread</string>
+			<key>target</key>
+			<string>pthread</string>
 			<key>version</key>
 			<string>218.51.1</string>
 		</dict>
 		<key>libpthread_generic_static</key>
 		<dict>
-		<key>original</key>
-		<string>libpthread</string>
-		<key>target</key>
-		<string>libpthread.a generic</string>
+			<key>original</key>
+			<string>libpthread</string>
+			<key>target</key>
+			<string>libpthread.a generic</string>
 			<key>version</key>
 			<string>218.51.1</string>
 		</dict>
 		<key>libpthread_dyld_static</key>
 		<dict>
-		<key>original</key>
-		<string>libpthread</string>
-		<key>target</key>
-		<string>libpthread.a dyld</string>
+			<key>original</key>
+			<string>libpthread</string>
+			<key>target</key>
+			<string>libpthread.a dyld</string>
 			<key>version</key>
 			<string>218.51.1</string>
 		</dict>
 		<key>libpthread_eOS_static</key>
 		<dict>
-		<key>original</key>
-		<string>libpthread</string>
-		<key>target</key>
-		<string>libpthread.a eOS</string>
+			<key>original</key>
+			<string>libpthread</string>
+			<key>target</key>
+			<string>libpthread.a eOS</string>
 			<key>version</key>
 			<string>218.51.1</string>
 		</dict>
@@ -1283,7 +1283,7 @@
 		<dict>
 			<key>patchfiles</key>
 			<array>
-			<string>syslog-349.50.5.p1.patch</string>
+				<string>syslog-349.50.5.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>349.50.5</string>
@@ -1367,34 +1367,34 @@
 		<dict>
 			<key>environment</key>
 			<dict>
-                <key>SDKROOT</key>
-                <string>macosx10.12</string>
-                <key>RC_ARCHS</key>
-                <string>x86_64</string>
-                <key>KERNEL_CONFIGS</key>
-                <string>RELEASE</string>
+				<key>SDKROOT</key>
+				<string>macosx10.12</string>
+				<key>RC_ARCHS</key>
+				<string>x86_64</string>
+				<key>KERNEL_CONFIGS</key>
+				<string>RELEASE</string>
 			</dict>
 			<key>version</key>
 			<string>3789.51.2</string>
 		</dict>
 		<key>libkxld</key>
-        <dict>
-		<!--key>alias</key>
-		<string>libkxld</string-->
-         <key>original</key>
-         <string>xnu</string>
-                        <key>environment</key>
-                        <dict>
-                           <key>SDKROOT</key>
-                           <string>macosx10.12</string>
-                           <key>RC_ARCHS</key>
-                           <string>x86_64</string>
-                           <key>KERNEL_CONFIGS</key>
-                           <string>RELEASE</string>
-                        </dict>
-                        <key>version</key>
-                        <string>3789.51.2</string>
-                </dict>
+		<dict>
+			<!--key>alias</key>
+			<string>libkxld</string-->
+			<key>original</key>
+			<string>xnu</string>
+			<key>environment</key>
+			<dict>
+				<key>SDKROOT</key>
+				<string>macosx10.12</string>
+				<key>RC_ARCHS</key>
+				<string>x86_64</string>
+				<key>KERNEL_CONFIGS</key>
+				<string>RELEASE</string>
+			</dict>
+			<key>version</key>
+			<string>3789.51.2</string>
+		</dict>
 		<key>zip</key>
 		<dict>
 			<key>version</key>
