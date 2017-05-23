@@ -978,6 +978,7 @@
 			<key>patchfiles</key>
 			<array>
 				<string>libplatform-126.50.8.p1.patch</string>
+				<string>libplatform-126.50.8.xcode.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>126.50.8</string>
@@ -988,6 +989,15 @@
 			<string>libplatform</string>
 			<key>target</key>
 			<string>libplatform dyld</string>
+			<key>version</key>
+			<string>126.50.8</string>
+		</dict>
+		<key>libplatform_os_headers</key>
+		<dict>
+			<key>original</key>
+			<string>libplatform</string>
+			<key>target</key>
+			<string>os headers</string>
 			<key>version</key>
 			<string>126.50.8</string>
 		</dict>
