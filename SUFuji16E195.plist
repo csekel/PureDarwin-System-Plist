@@ -735,6 +735,13 @@
 			<key>version</key>
 			<string>209.50.12</string>
 		</dict>
+		<key>dtrace_ctftools</key>
+		<dict>
+			<key>original</key>
+			<string>dtrace</string>
+			<key>target</key>
+			<string>dtrace_host</string>
+		</dict>
 		<key>dyld</key>
 		<dict>
 			<key>patchfiles</key>
