@@ -919,6 +919,7 @@
 				<key>header</key>
 				<array>
 					<string>xnu</string>
+					<string>libplatform_os_headers</string>
 				</array>
 			</dict>
 			<key>patchfiles</key>
@@ -1420,6 +1421,7 @@
 			<key>patchfiles</key>
 			<array>
 				<string>xnu-3789.51.2.fix-path.patch</string>
+				<string>xnu-3789.51.2.fix-codesign.p1.patch</string>
 			</array>
 		</dict>
 		<key>libkxld</key>
