@@ -5,6 +5,7 @@
 
 	<key>source_sites</key>
 	<array>
+		<string>https://github.com/Andromeda-OS/darwinbuild-archives/raw/master</string>
 		<string>https://opensource.apple.com/tarballs</string>
 	</array>
 	<key>patch_sites</key>
