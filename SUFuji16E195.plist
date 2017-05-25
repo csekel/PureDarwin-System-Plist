@@ -90,6 +90,11 @@
 			<string>1.0.0</string>
 			<key>target</key>
 			<string>boot2</string>
+			<key>environment</key>
+			<dict>
+				<key>RC_ARCHS</key>
+				<string>i386</string>
+			</dict>
 		</dict>
 		<key>bootstrap_cmds</key>
 		<dict>
