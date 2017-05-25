@@ -87,7 +87,7 @@
 		<key>booter</key>
 		<dict>
 			<key>version</key>
-			<string>1.0.0</string>
+			<string>2.0.0</string>
 			<key>target</key>
 			<string>boot2</string>
 			<key>environment</key>
