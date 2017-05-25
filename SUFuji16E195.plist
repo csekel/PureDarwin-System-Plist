@@ -83,6 +83,13 @@
 			<key>version</key>
 			<string>14</string>
 		</dict>
+		<key>booter</key>
+		<dict>
+			<key>version</key>
+			<string>1.0.0</string>
+			<key>target</key>
+			<string>boot2</string>
+		</dict>
 		<key>bootstrap_cmds</key>
 		<dict>
 			<key>version</key>
@@ -137,6 +144,15 @@
 		<dict>
 			<key>version</key>
 			<string>1005</string>
+		</dict>
+		<key>startupfiletool</key>
+		<dict>
+			<key>version</key>
+			<string>1.0.0</string>
+			<key>original</key>
+			<string>booter</string>
+			<key>target</key>
+			<string>startupfiletool</string>
 		</dict>
 		<key>subversion</key>
 		<dict>
