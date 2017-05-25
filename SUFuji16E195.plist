@@ -154,7 +154,7 @@
 		<key>startupfiletool</key>
 		<dict>
 			<key>version</key>
-			<string>1.0.0</string>
+			<string>2.0.0</string>
 			<key>original</key>
 			<string>booter</string>
 			<key>target</key>
