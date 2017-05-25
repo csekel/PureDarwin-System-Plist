@@ -925,7 +925,8 @@
 			<key>patchfiles</key>
 			<array>
 				<string>libdispatch-703.50.37.p1.patch</string>
-				<string>libdispatch-703.50.37.libfirehose.patch</string>
+				<string>libdispatch-703.50.37.libfirehose.p1.patch</string>
+				<string>libdispatch-703.50.37.libfirehose-install.p1.patch</string>
 			</array>
 			<key>version</key>
 			<string>703.50.37</string>
