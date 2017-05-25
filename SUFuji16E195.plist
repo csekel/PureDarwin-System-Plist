@@ -11,6 +11,7 @@
 	<key>patch_sites</key>
 	<array>
 		<string>http://67.205.155.153/Patches</string>
+		<string>https://github.com/csekel/darwinbuild/raw/master/patches</string>
 		<string>https://github.com/Andromeda-OS/darwinbuild/raw/master/patches</string>
 	</array>
 
