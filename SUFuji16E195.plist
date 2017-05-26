@@ -57,7 +57,7 @@
 		<key>RC_TARGET_CONFIG</key>
 		<string>MacOSX</string>
 		<key>SDKROOT</key>
-		<string>macosx10.12</string>
+		<string>puredarwin</string>
 
 	</dict>
 
@@ -95,6 +95,8 @@
 			<dict>
 				<key>RC_ARCHS</key>
 				<string>i386</string>
+				<key>SDKROOT</key>
+				<string>macosx10.12</string>
 			</dict>
 		</dict>
 		<key>bootstrap_cmds</key>
@@ -767,6 +769,11 @@
 			<string>dtrace_host</string>
 			<key>version</key>
 			<string>209.50.12</string>
+			<key>environment</key>
+			<dict>
+				<key>SDKROOT</key>
+				<string>macosx10.12</string>
+			</dict>
 		</dict>
 		<key>dyld</key>
 		<dict>
@@ -953,6 +960,11 @@
 			</array>
 			<key>version</key>
 			<string>703.50.37</string>
+			<key>environment</key>
+			<dict>
+				<key>SDKROOT</key>
+				<string>macosx10.12</string>
+			</dict>
 		</dict>
 		<key>libedit</key>
 		<dict>
@@ -1446,6 +1458,7 @@
 			<array>
 				<string>xnu-3789.51.2.fix-path.patch</string>
 				<string>xnu-3789.51.2.fix-codesign.p1.patch</string>
+				<string>xnu-3789.51.2.installhdrs-sdk.p1.patch</string>
 			</array>
 		</dict>
 		<key>libkxld</key>
