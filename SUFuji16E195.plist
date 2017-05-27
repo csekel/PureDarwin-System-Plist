@@ -57,7 +57,7 @@
 		<key>RC_TARGET_CONFIG</key>
 		<string>MacOSX</string>
 		<key>SDKROOT</key>
-		<string>puredarwin</string>
+		<string>macosx.internal</string>
 
 	</dict>
 
