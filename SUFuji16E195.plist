@@ -1469,6 +1469,10 @@
 				<array>
 					<string>AvailabilityVersions</string>
 				</array>
+				<key>build</key>
+				<array>
+					<string>dtrace_host</string>
+				</array>
 			</dict>
 			<key>patchfiles</key>
 			<array>
