@@ -941,7 +941,7 @@
 			<dict>
 				<key>header</key>
 				<array>
-					<string>xnu</string>
+					<string>xnu_headers</string>
 					<string>libplatform_os_headers</string>
 				</array>
 			</dict>
@@ -1437,6 +1437,34 @@
 					<string>dtrace_host</string>
 					<string>libfirehose_kernel</string>
 				</array>
+				<key>header</key>
+				<array>
+					<string>AvailabilityVersions</string>
+				</array>
+			</dict>
+			<key>patchfiles</key>
+			<array>
+				<string>xnu-3789.51.2.fix-path.patch</string>
+				<string>xnu-3789.51.2.fix-codesign.p1.patch</string>
+			</array>
+		</dict>
+		<key>xnu_headers</key>
+		<dict>
+			<key>environment</key>
+			<dict>
+				<key>SDKROOT</key>
+				<string>macosx10.13</string>
+				<key>RC_ARCHS</key>
+				<string>x86_64</string>
+				<key>KERNEL_CONFIGS</key>
+				<string>RELEASE</string>
+			</dict>
+			<key>original</key>
+			<string>xnu</string>
+			<key>version</key>
+			<string>3789.51.2</string>
+			<key>dependencies</key>
+			<dict>
 				<key>header</key>
 				<array>
 					<string>AvailabilityVersions</string>
