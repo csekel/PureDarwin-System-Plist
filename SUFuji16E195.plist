@@ -57,7 +57,7 @@
 		<key>RC_TARGET_CONFIG</key>
 		<string>MacOSX</string>
 		<key>SDKROOT</key>
-		<string>macosx10.12</string>
+		<string>macosx10.13</string>
 
 	</dict>
 
@@ -1421,7 +1421,7 @@
 			<key>environment</key>
 			<dict>
 				<key>SDKROOT</key>
-				<string>macosx10.12</string>
+				<string>macosx10.13</string>
 				<key>RC_ARCHS</key>
 				<string>x86_64</string>
 				<key>KERNEL_CONFIGS</key>
@@ -1457,7 +1457,7 @@
 			<key>environment</key>
 			<dict>
 				<key>SDKROOT</key>
-				<string>macosx10.12</string>
+				<string>macosx10.13</string>
 				<key>RC_ARCHS</key>
 				<string>x86_64</string>
 				<key>KERNEL_CONFIGS</key>
