@@ -984,6 +984,13 @@
 			<key>version</key>
 			<string>50</string>
 		</dict>
+		<key>libkmod</key>
+		<dict>
+			<key>original</key>
+			<string>xnu</string>
+			<key>version</key>
+			<string>3789.51.2</string>
+		</dict>
 		<key>libmalloc</key>
 		<dict>
 			<key>version</key>
