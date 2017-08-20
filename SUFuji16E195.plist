@@ -1478,6 +1478,7 @@
 				<string>xnu-3789.51.2.fix-path.patch</string>
 				<string>xnu-3789.51.2.fix-codesign.p1.patch</string>
 				<string>xnu-3789.51.2.xcode9-warnings.p1.patch</string>
+				<string>xnu-3789.51.2.copyright-check.p1.patch</string>
 			</array>
 		</dict>
 		<key>xnu_headers</key>
