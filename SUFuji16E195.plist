@@ -5,7 +5,6 @@
 
 	<key>source_sites</key>
 	<array>
-		<string>https://github.com/Andromeda-OS/darwinbuild-archives/raw/master</string>
 		<string>https://opensource.apple.com/tarballs</string>
 	</array>
 	<key>patch_sites</key>
@@ -91,6 +90,8 @@
 			<string>2.0.0</string>
 			<key>target</key>
 			<string>boot2</string>
+			<key>github</key>
+			<string>Andromeda-OS/booter</string>
 			<key>environment</key>
 			<dict>
 				<key>RC_ARCHS</key>
