@@ -699,6 +699,20 @@
 			<key>version</key>
 			<string>263</string>
 		</dict>
+		<key>cdrtools</key>
+		<dict>
+			<key>version</key>
+			<string>3.02</string>
+			<key>github</key>
+			<string>Andromeda-OS/cdrtools</string>
+			<key>dependencies</key>
+			<dict>
+				<key>build</key>
+				<array>
+					<string>schilymake</string>
+				</array>
+			</dict>
+		</dict>
 		<key>configd</key>
 		<dict>
 			<key>version</key>
@@ -1303,6 +1317,13 @@
 		<dict>
 			<key>version</key>
 			<string>2.4.1</string>
+		</dict>
+		<key>schilymake</key>
+		<dict>
+			<key>version</key>
+			<string>1.2.5</string>
+			<key>github</key>
+			<string>Andromeda-OS/schilymake</string>
 		</dict>
 		<key>screen</key>
 		<dict>
