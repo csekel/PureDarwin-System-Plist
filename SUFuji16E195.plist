@@ -66,6 +66,10 @@
 		<array>
 			<string>CoreOSMakefiles Git bison bootstrap_cmds cctools clang cvs developer_cmds gcc_select gm4 gnumake gperf headerdoc ld64 pb_makefiles subversion tapi </string>
 		</array>
+		<key>boot</key>
+		<array>
+			<string>xnu AppleI386GenericPlatform corecrypto booter</string>
+		</array>
 	</dict>
 	<key>projects</key>
 	<dict>
@@ -87,7 +91,7 @@
 		<key>booter</key>
 		<dict>
 			<key>version</key>
-			<string>2.0.0</string>
+			<string>3</string>
 			<key>target</key>
 			<string>boot2</string>
 			<key>github</key>
