@@ -184,7 +184,7 @@
 		<key>AppleI386GenericPlatform</key>
 		<dict>
 			<key>version</key>
-			<string>10.0</string>
+			<string>11.0</string>
 			<key>github</key>
 			<string>Andromeda-OS/AppleI386GenericPlatform</string>
 			<key>environment</key>
