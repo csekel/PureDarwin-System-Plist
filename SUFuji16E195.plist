@@ -298,6 +298,8 @@
 		<dict>
 			<key>version</key>
 			<string>1150.3</string>
+			<key>github</key>
+			<string>Andromeda-OS/corecrypto</string>
 		</dict>
 		<key>ICU</key>
 		<dict>
