@@ -91,7 +91,7 @@
 		<key>booter</key>
 		<dict>
 			<key>version</key>
-			<string>3</string>
+			<string>3.1.1</string>
 			<key>target</key>
 			<string>boot2</string>
 			<key>github</key>
