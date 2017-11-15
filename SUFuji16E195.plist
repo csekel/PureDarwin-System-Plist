@@ -708,7 +708,7 @@
 		<key>cdrtools</key>
 		<dict>
 			<key>version</key>
-			<string>3.02</string>
+			<string>3.02.0.0.1</string>
 			<key>github</key>
 			<string>Andromeda-OS/cdrtools</string>
 			<key>dependencies</key>
