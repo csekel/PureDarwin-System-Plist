@@ -1505,6 +1505,7 @@
 				<string>xnu-3789.51.2.xcode9-warnings.p1.patch</string>
 				<string>xnu-3789.51.2.copyright-check.p1.patch</string>
 				<string>xnu-3789.51.2.paths.p1.patch</string>
+				<string>xnu-3789.51.2.firehose-buildroot.p1.patch</string>
 			</array>
 		</dict>
 		<key>xnu_headers</key>
