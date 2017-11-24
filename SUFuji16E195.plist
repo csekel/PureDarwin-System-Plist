@@ -459,6 +459,13 @@
 			<key>version</key>
 			<string>1158.50.2</string>
 		</dict>
+		<key>Libcompiler_rt</key>
+		<dict>
+			<key>version</key>
+			<string>5.0.0</string>
+			<key>github</key>
+			<string>Andromeda-OS/Libcompiler_rt</string>
+		</dict>
 		<key>Libinfo</key>
 		<dict>
 			<key>patchfiles</key>
