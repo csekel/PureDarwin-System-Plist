@@ -2,17 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
 	<key>source_sites</key>
 	<array>
 		<string>https://opensource.apple.com/tarballs</string>
 	</array>
+
 	<key>patch_sites</key>
 	<array>
 		<string>http://67.205.155.153/Patches</string>
 		<string>https://github.com/csekel/darwinbuild/raw/master/patches</string>
 		<string>https://github.com/Andromeda-OS/darwinbuild/raw/master/patches</string>
 	</array>
+
 	<key>build</key>
 	<string>Lobo17A365</string>
 	<key>darwin</key>
@@ -20,6 +21,7 @@
 	<key>macosx</key>
 	<string>macOS 10.13</string>
 	<key>environment</key>
+
 	<dict>
 		<key>INSTALLED_PRODUCT_ASIDES</key>
 		<string>YES</string>
@@ -67,6 +69,7 @@
 			<string>xnu AppleI386GenericPlatform corecrypto booter</string>
 		</array>
 	</dict>
+
 	<key>projects</key>
 	<dict>
 		<key>AppleFileSystemDriver</key>
