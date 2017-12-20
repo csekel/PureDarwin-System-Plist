@@ -11,7 +11,7 @@
 	<array>
 		<string>http://67.205.155.153/Patches</string>
 		<string>https://github.com/csekel/darwinbuild/raw/master/patches</string>
-		<string>https://github.com/Andromeda-OS/darwinbuild/raw/master/patches</string>
+		<string>https://github.com/Andromeda-OS/PureDarwin-System-Plist/raw/master/patches</string>
 	</array>
 
 	<key>build</key>
@@ -556,6 +556,19 @@
 		<dict>
 			<key>version</key>
 			<string>262</string>
+		</dict>
+		<key>dtrace_host</key>
+		<dict>
+			<key>version</key>
+			<string>262</string>
+			<key>original</key>
+			<string>dtrace</string>
+			<key>target</key>
+			<string>dtrace_host</string>
+			<key>patchfiles</key>
+			<array>
+				<string>dtrace-262.install-paths.p1.patch</string>
+			</array>
 		</dict>
 		<key>dyld</key>
 		<dict>
