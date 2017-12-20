@@ -1070,6 +1070,37 @@
 			<key>version</key>
 			<string>4570.1.46</string>
 		</dict>
+		<key>xnu_headers</key>
+		<dict>
+			<key>environment</key>
+			<dict>
+				<key>RC_ARCHS</key>
+				<string>x86_64</string>
+				<key>KERNEL_CONFIGS</key>
+				<string>RELEASE</string>
+			</dict>
+			<key>original</key>
+			<string>xnu</string>
+			<key>version</key>
+			<string>4570.1.46</string>
+			<key>dependencies</key>
+			<dict>
+				<key>header</key>
+				<array>
+					<string>AvailabilityVersions</string>
+				</array>
+				<key>build</key>
+				<array>
+					<string>dtrace_host</string>
+				</array>
+			</dict>
+			<key>patchfiles</key>
+			<array>
+				<string>xnu-4570.1.46.availability-path.p1.patch</string>
+				<string>xnu-4570.1.46.dtrace-host.p1.patch</string>
+				<string>xnu-4570.1.46.fix-codesign.p1.patch</string>
+			</array>
+		</dict>
 		<key>zip</key>
 		<dict>
 			<key>version</key>
