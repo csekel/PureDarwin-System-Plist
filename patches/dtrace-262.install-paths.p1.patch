@@ -1,0 +1,52 @@
+diff --git a/dtrace.xcodeproj/project.pbxproj b/dtrace.xcodeproj/project.pbxproj
+index f237b76..8e9b757 100644
+--- a/dtrace.xcodeproj/project.pbxproj
++++ b/dtrace.xcodeproj/project.pbxproj
+@@ -13127,7 +13127,6 @@
+ 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+-				INSTALL_PATH = "$(DT_TOOLCHAIN_DIR)/usr/local/bin";
+ 				OTHER_CFLAGS = (
+ 					"-D_INT64_TYPE",
+ 					"-D_LONGLONG_TYPE",
+@@ -13157,7 +13156,6 @@
+ 				);
+ 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+ 				GCC_MODEL_TUNING = G5;
+-				INSTALL_PATH = "$(DT_TOOLCHAIN_DIR)/usr/local/bin";
+ 				OTHER_CFLAGS = (
+ 					"-D_INT64_TYPE",
+ 					"-D_LONGLONG_TYPE",
+@@ -13189,7 +13187,6 @@
+ 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+-				INSTALL_PATH = "$(DT_TOOLCHAIN_DIR)/usr/local/bin";
+ 				OTHER_CFLAGS = (
+ 					"-D_INT64_TYPE",
+ 					"-D_LONGLONG_TYPE",
+@@ -13218,7 +13215,6 @@
+ 				);
+ 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+ 				GCC_MODEL_TUNING = G5;
+-				INSTALL_PATH = "$(DT_TOOLCHAIN_DIR)/usr/local/bin";
+ 				OTHER_CFLAGS = (
+ 					"-D_INT64_TYPE",
+ 					"-D_LONGLONG_TYPE",
+@@ -13284,7 +13280,6 @@
+ 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+ 				GCC_MODEL_TUNING = G5;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
+-				INSTALL_PATH = "$(DT_TOOLCHAIN_DIR)/usr/local/bin";
+ 				OTHER_CFLAGS = (
+ 					"-D_INT64_TYPE",
+ 					"-D_LONGLONG_TYPE",
+@@ -13314,7 +13309,6 @@
+ 				);
+ 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+ 				GCC_MODEL_TUNING = G5;
+-				INSTALL_PATH = "$(DT_TOOLCHAIN_DIR)/usr/local/bin";
+ 				OTHER_CFLAGS = (
+ 					"-D_INT64_TYPE",
+ 					"-D_LONGLONG_TYPE",
