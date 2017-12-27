@@ -20,8 +20,8 @@
 	<string>Darwin 17</string>
 	<key>macosx</key>
 	<string>macOS 10.13</string>
-	<key>environment</key>
 
+	<key>environment</key>
 	<dict>
 		<key>INSTALLED_PRODUCT_ASIDES</key>
 		<string>YES</string>
@@ -55,7 +55,6 @@
 		<string>MacOSX</string>
 		<key>SDKROOT</key>
 		<string>macosx10.13</string>
-
 	</dict>
 
 	<key>groups</key>
