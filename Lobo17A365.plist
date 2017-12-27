@@ -101,6 +101,13 @@
 			<key>version</key>
 			<string>128</string>
 		</dict>
+		<key>CarbonHeaders</key>
+		<dict>
+			<key>version</key>
+			<string>100</string>
+			<key>github</key>
+			<string>Andromeda-OS/CarbonHeaders</string>
+		</dict>
 		<key>CF</key>
 		<dict>
 			<key>version</key>
