@@ -1114,6 +1114,7 @@
 				<string>xnu-4570.1.46.availability-path.p1.patch</string>
 				<string>xnu-4570.1.46.dtrace-host.p1.patch</string>
 				<string>xnu-4570.1.46.fix-codesign.p1.patch</string>
+				<string>xnu-4570.1.46.system-framework.p1.patch</string>
 			</array>
 		</dict>
 		<key>zip</key>
