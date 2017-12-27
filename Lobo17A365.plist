@@ -716,6 +716,28 @@
 			<key>version</key>
 			<string>18.1</string>
 		</dict>
+		<key>libfirehose_kernel</key>
+		<dict>
+			<key>version</key>
+			<string>913.1.6</string>
+			<key>original</key>
+			<string>libdispatch</string>
+			<key>target</key>
+			<string>libfirehose_kernel</string>
+			<key>patchfiles</key>
+			<array>
+				<string>libdispatch-913.1.6.libfirehose-kernel.p1.patch</string>
+			</array>
+			<key>dependencies</key>
+			<dict>
+				<key>header</key>
+				<array>
+					<string>xnu_headers</string>
+					<string>libplatform_headers</string>
+					<string>CarbonHeaders</string>
+				</array>
+			</dict>
+		</dict>
 		<key>libfs</key>
 		<dict>
 			<key>version</key>
