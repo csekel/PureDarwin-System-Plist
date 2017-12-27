@@ -739,6 +739,22 @@
 		<dict>
 			<key>version</key>
 			<string>161</string>
+			<key>dependencies</key>
+			<dict>
+				<key>header</key>
+				<array>
+					<string>xnu_headers</string>
+				</array>
+			</dict>
+		</dict>
+		<key>libplatform_headers</key>
+		<dict>
+			<key>version</key>
+			<string>161</string>
+			<key>original</key>
+			<string>libplatform</string>
+			<key>target</key>
+			<string>headers</string>
 		</dict>
 		<key>libpthread</key>
 		<dict>
