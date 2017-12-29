@@ -478,6 +478,20 @@
 			<key>version</key>
 			<string>7604.1.38.1.6</string>
 		</dict>
+		<key>booter</key>
+		<dict>
+			<key>environment</key>
+			<dict>
+				<key>RC_ARCHS</key>
+				<string>i386</string>
+			</dict>
+			<key>version</key>
+			<string>3.1.1</string>
+			<key>target</key>
+			<string>boot2</string>
+			<key>github</key>
+			<string>Andromeda-OS/booter</string>
+		</dict>
 		<key>bootp</key>
 		<dict>
 			<key>version</key>
