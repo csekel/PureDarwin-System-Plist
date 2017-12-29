@@ -76,6 +76,25 @@
 			<key>version</key>
 			<string>23</string>
 		</dict>
+		<key>AppleI386GenericPlatform</key>
+		<dict>
+			<key>version</key>
+			<string>11.0</string>
+			<key>github</key>
+			<string>Andromeda-OS/AppleI386GenericPlatform</string>
+			<key>dependencies</key>
+			<dict>
+				<key>header</key>
+				<array>
+					<string>xnu_headers</string>
+				</array>
+			</dict>
+			<key>environment</key>
+			<dict>
+				<key>RC_ARCHS</key>
+				<string>x86_64</string>
+			</dict>
+		</dict>
 		<key>AppleRAID</key>
 		<dict>
 			<key>version</key>
