@@ -108,6 +108,20 @@
 			<key>github</key>
 			<string>Andromeda-OS/CarbonHeaders</string>
 		</dict>
+		<key>cdrtools</key>
+		<dict>
+			<key>version</key>
+			<string>3.02.0.0.1</string>
+			<key>github</key>
+			<string>Andromeda-OS/cdrtools</string>
+			<key>dependencies</key>
+			<dict>
+				<key>build</key>
+				<array>
+					<string>schilymake</string>
+				</array>
+			</dict>
+		</dict>
 		<key>CF</key>
 		<dict>
 			<key>version</key>
@@ -1010,6 +1024,13 @@
 		<dict>
 			<key>version</key>
 			<string>131</string>
+		</dict>
+		<key>schilymake</key>
+		<dict>
+			<key>version</key>
+			<string>1.2.5</string>
+			<key>github</key>
+			<string>Andromeda-OS/schilymake</string>
 		</dict>
 		<key>screen</key>
 		<dict>
