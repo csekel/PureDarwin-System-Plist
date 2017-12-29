@@ -513,6 +513,20 @@
 			<key>version</key>
 			<string>155</string>
 		</dict>
+		<key>corecrypto</key>
+		<dict>
+			<key>version</key>
+			<string>1150.3</string>
+			<key>github</key>
+			<string>Andromeda-OS/corecrypto</string>
+			<key>dependencies</key>
+			<dict>
+				<key>header</key>
+				<array>
+					<string>xnu_headers</string>
+				</array>
+			</dict>
+		</dict>
 		<key>cron</key>
 		<dict>
 			<key>version</key>
