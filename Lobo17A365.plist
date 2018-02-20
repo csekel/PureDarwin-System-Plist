@@ -155,6 +155,7 @@
 			<array>
 				<string>CoreOSMakefiles-77.no-xcrun.p1.patch</string>
 				<string>CoreOSMakefiles-77.install-location.p1.patch</string>
+				<string>CoreOSMakefiles-77.search-path.p1.patch</string>
 			</array>
 		</dict>
 		<key>CrackLib</key>

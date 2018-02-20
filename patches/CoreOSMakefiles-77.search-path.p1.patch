@@ -1,0 +1,13 @@
+diff --git a/ReleaseControl/Common.make b/ReleaseControl/Common.make
+index b874c42..3c50eb7 100644
+--- a/ReleaseControl/Common.make
++++ b/ReleaseControl/Common.make
+@@ -36,7 +36,7 @@
+ ##
+ 
+ ifndef CoreOSMakefiles
+-CoreOSMakefiles = $(MAKEFILEPATH)/CoreOS
++CoreOSMakefiles = $(RC_BuildRoot)/usr/local/share/CoreOSMakefiles
+ endif
+ 
+ include $(CoreOSMakefiles)/Standard/Standard.make
