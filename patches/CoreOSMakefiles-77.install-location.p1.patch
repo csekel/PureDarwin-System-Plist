@@ -1,0 +1,12 @@
+diff --git a/Makefile b/Makefile
+index 43d8377..10d4b3d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,6 +1,6 @@
+ Project=CoreOSMakefiles
+ 
+-Destination = $(DEVELOPER_DIR)/Makefiles/CoreOS
++Destination ?= /usr/local/share/CoreOSMakefiles
+ BSDSUFFIX   = .mk
+ BSDDEFINE   = BSDMAKESTYLE
+ GNUSUFFIX   = .make

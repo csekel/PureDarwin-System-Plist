@@ -147,6 +147,16 @@
 			<key>version</key>
 			<string>60118.1.1</string>
 		</dict>
+		<key>CoreOSMakefiles</key>
+		<dict>
+			<key>version</key>
+			<string>77</string>
+			<key>patchfiles</key>
+			<array>
+				<string>CoreOSMakefiles-77.no-xcrun.p1.patch</string>
+				<string>CoreOSMakefiles-77.install-location.p1.patch</string>
+			</array>
+		</dict>
 		<key>CrackLib</key>
 		<dict>
 			<key>version</key>
