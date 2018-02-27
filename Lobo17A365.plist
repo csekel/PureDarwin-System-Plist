@@ -838,22 +838,27 @@
 		<key>libplatform</key>
 		<dict>
 			<key>version</key>
-			<string>161</string>
+			<string>161.0.0.0.1</string>
+			<key>github</key>
+			<string>Andromeda-OS/libplatform</string>
 			<key>dependencies</key>
 			<dict>
 				<key>header</key>
 				<array>
 					<string>xnu_headers</string>
 					<string>libplatform_headers</string>
+					<string>Libsystem</string>
 				</array>
 			</dict>
 		</dict>
 		<key>libplatform_headers</key>
 		<dict>
 			<key>version</key>
-			<string>161</string>
+			<string>161.0.0.0.1</string>
 			<key>original</key>
 			<string>libplatform</string>
+			<key>target</key>
+			<string>headers</string>
 		</dict>
 		<key>libpthread</key>
 		<dict>
