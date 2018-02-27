@@ -784,6 +784,23 @@
 			<key>version</key>
 			<string>913.1.6</string>
 		</dict>
+		<key>libdyld</key>
+		<dict>
+			<key>version</key>
+			<string>519.2.1</string>
+			<key>original</key>
+			<string>dyld</string>
+			<key>target</key>
+			<string>libdyld.dylib</string>
+			<key>dependencies</key>
+			<dict>
+				<key>header</key>
+				<array>
+					<string>Libsystem</string>
+					<string>xnu_headers</string>
+				</array>
+			</dict>
+		</dict>
 		<key>libedit</key>
 		<dict>
 			<key>version</key>
