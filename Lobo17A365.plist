@@ -145,7 +145,7 @@
 		<key>CommonCrypto</key>
 		<dict>
 			<key>version</key>
-			<string>60118.1.1</string>
+			<string>55010</string>
 		</dict>
 		<key>CoreOSMakefiles</key>
 		<dict>
@@ -759,6 +759,11 @@
 			<key>version</key>
 			<string>25</string>
 		</dict>
+		<key>launchd</key>
+		<dict>
+			<key>version</key>
+			<string>842.92.1</string>
+		</dict>
 		<key>less</key>
 		<dict>
 			<key>version</key>
@@ -792,12 +797,22 @@
 			<string>dyld</string>
 			<key>target</key>
 			<string>libdyld.dylib</string>
+			<key>patchfiles</key>
+			<array>
+				<string>dyld-519.2.1.framework-search.p1.patch</string>
+				<string>dyld-519.2.1.availabilityversions.p1.patch</string>
+				<string>dyld-519.2.1.no-rootless.p1.patch</string>
+			</array>
 			<key>dependencies</key>
 			<dict>
 				<key>header</key>
 				<array>
+					<string>CommonCrypto</string>
+					<string>Libc</string>
 					<string>Libsystem</string>
 					<string>xnu_headers</string>
+					<string>libplatform_headers</string>
+					<string>liblaunch</string>
 				</array>
 			</dict>
 		</dict>
@@ -853,6 +868,15 @@
 			<key>version</key>
 			<string>51</string>
 		</dict>
+		<key>liblaunch</key>
+		<dict>
+			<key>version</key>
+			<string>842.92.1</string>
+			<key>original</key>
+			<string>launchd</string>
+			<key>target</key>
+			<string>liblaunch</string>
+		</dict>
 		<key>libmalloc</key>
 		<dict>
 			<key>version</key>
@@ -877,6 +901,10 @@
 					<string>libplatform_headers</string>
 					<string>Libsystem</string>
 					<string>Libsyscall</string>
+				</array>
+				<key>build</key>
+				<array>
+					<string>libdyld</string>
 				</array>
 			</dict>
 		</dict>

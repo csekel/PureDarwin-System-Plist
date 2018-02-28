@@ -1,0 +1,13 @@
+diff --git a/bin/expand.pl b/bin/expand.pl
+index b21ef3f..61b8866 100755
+--- a/bin/expand.pl
++++ b/bin/expand.pl
+@@ -3,7 +3,7 @@
+ use strict;
+ 
+ 
+-my $sdk      = $ENV{"SDKROOT"};
++my $sdk      = $ENV{"RC_BuildRoot"};
+ my $availCmd = $sdk . "/usr/local/libexec/availability.pl";
+ 
+ sub expandVersions

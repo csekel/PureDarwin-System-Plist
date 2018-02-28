@@ -1,0 +1,86 @@
+commit ff166b8beadf7a85769235a8e93b61a85f3e1882
+Author: William Kent <wjk@users.noreply.github.com>
+Date:   Tue Feb 27 22:31:32 2018 -0500
+
+    Apply patch: no-rootless
+
+diff --git a/configs/dyld.xcconfig b/configs/dyld.xcconfig
+index d1ec099..d937941 100644
+--- a/configs/dyld.xcconfig
++++ b/configs/dyld.xcconfig
+@@ -15,7 +15,7 @@ PRODUCT_NAME[sdk=macosx*]     = dyld
+ INSTALL_PATH   = /usr/lib
+ 
+ //:configuration = Debug
+-GCC_PREPROCESSOR_DEFINITIONS = DYLD_IN_PROCESS=1 DYLD_VERSION=$(RC_ProjectSourceVersion) BUILDING_DYLD=1 DEBUG=1
++GCC_PREPROCESSOR_DEFINITIONS = DYLD_IN_PROCESS=1 DYLD_VERSION=$(RC_ProjectSourceVersion) BUILDING_DYLD=1 DEBUG=1 __PUREDARWIN__=1
+ 
+ //:configuration = Release
+-GCC_PREPROCESSOR_DEFINITIONS = DYLD_IN_PROCESS=1 DYLD_VERSION=$(RC_ProjectSourceVersion) BUILDING_DYLD=1
++GCC_PREPROCESSOR_DEFINITIONS = DYLD_IN_PROCESS=1 DYLD_VERSION=$(RC_ProjectSourceVersion) BUILDING_DYLD=1 __PUREDARWIN__=1
+diff --git a/configs/libdyld.xcconfig b/configs/libdyld.xcconfig
+index 8f06e5a..a24e1a0 100644
+--- a/configs/libdyld.xcconfig
++++ b/configs/libdyld.xcconfig
+@@ -7,8 +7,8 @@ INSTALL_PATH = /usr/lib/system
+ 
+ 
+ //:configuration = Debug
+-GCC_PREPROCESSOR_DEFINITIONS = DYLD_IN_PROCESS=1 BUILDING_LIBDYLD=1 DEBUG=1
++GCC_PREPROCESSOR_DEFINITIONS = DYLD_IN_PROCESS=1 BUILDING_LIBDYLD=1 DEBUG=1 __PUREDARWIN__=1
+ 
+ //:configuration = Release
+-GCC_PREPROCESSOR_DEFINITIONS = DYLD_IN_PROCESS=1 BUILDING_LIBDYLD=1
++GCC_PREPROCESSOR_DEFINITIONS = DYLD_IN_PROCESS=1 BUILDING_LIBDYLD=1 __PUREDARWIN__=1
+ 
+diff --git a/dyld3/Loading.cpp b/dyld3/Loading.cpp
+index 50785b5..b1ca36d 100644
+--- a/dyld3/Loading.cpp
++++ b/dyld3/Loading.cpp
+@@ -40,8 +40,10 @@
+ #include <System/machine/cpu_capabilities.h>
+ #include <bootstrap.h>
+ #include <CommonCrypto/CommonDigest.h>
++#ifndef __PUREDARWIN__
+ #include <sandbox.h>
+ #include <sandbox/private.h>
++#endif
+ #include <dispatch/dispatch.h>
+ 
+ #include "LaunchCache.h"
+@@ -67,7 +69,7 @@ namespace loader {
+ 
+ static bool sandboxBlocked(const char* path, const char* kind)
+ {
+-#if BUILDING_LIBDYLD || !TARGET_IPHONE_SIMULATOR
++#if (BUILDING_LIBDYLD || !TARGET_IPHONE_SIMULATOR) && !defined(__PUREDARWIN__)
+     sandbox_filter_type filter = (sandbox_filter_type)(SANDBOX_FILTER_PATH | SANDBOX_CHECK_NO_REPORT);
+     return ( sandbox_check(getpid(), kind, filter, path) > 0 );
+ #else
+diff --git a/dyld3/MachOParser.cpp b/dyld3/MachOParser.cpp
+index 27bf3ba..f9c8ece 100644
+--- a/dyld3/MachOParser.cpp
++++ b/dyld3/MachOParser.cpp
+@@ -37,7 +37,9 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <sys/mman.h>
++#ifndef __PUREDARWIN__
+ #include <rootless.h>
++#endif
+ #include <dirent.h>
+ #include <mach/mach.h>
+ #include <mach/machine.h>
+diff --git a/src/ImageLoader.h b/src/ImageLoader.h
+index fd70e2d..9b2ca73 100644
+--- a/src/ImageLoader.h
++++ b/src/ImageLoader.h
+@@ -44,7 +44,7 @@
+  #include <mach/vm_page_size.h>
+ #endif
+ 
+-#if __x86_64__ || __i386__
++#if (__x86_64__ || __i386__) && !defined(__PUREDARWIN__)
+ 	#include <CrashReporterClient.h>
+ #else
+ 	// work around until iOS has CrashReporterClient.h

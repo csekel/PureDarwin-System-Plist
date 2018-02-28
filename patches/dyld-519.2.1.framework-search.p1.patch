@@ -1,0 +1,220 @@
+commit 12316dcc3e2efeb8c9a8c7cf444a73324ca0046e
+Author: William Kent <wjk@users.noreply.github.com>
+Date:   Tue Feb 27 22:18:39 2018 -0500
+
+    Apply patch framwork-search
+
+diff --git a/dyld.xcodeproj/project.pbxproj b/dyld.xcodeproj/project.pbxproj
+index 121b7fa..e50c00b 100644
+--- a/dyld.xcodeproj/project.pbxproj
++++ b/dyld.xcodeproj/project.pbxproj
+@@ -286,6 +286,7 @@
+ 			isEditable = 1;
+ 			outputFiles = (
+ 			);
++			script = "";
+ 		};
+ 		F9574C4906C94DA700142BFA /* PBXBuildRule */ = {
+ 			isa = PBXBuildRule;
+@@ -294,6 +295,7 @@
+ 			isEditable = 1;
+ 			outputFiles = (
+ 			);
++			script = "";
+ 		};
+ /* End PBXBuildRule section */
+ 
+@@ -2098,7 +2100,6 @@
+ 				ONLY_ACTIVE_ARCH = YES;
+ 				OTHER_CFLAGS = "-DBOM_SUPPORT=1";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SUPPORTED_PLATFORMS = macosx;
+ 				TOOLCHAINS = default;
+ 				USER_HEADER_SEARCH_PATHS = "../launch-cache/";
+@@ -2149,7 +2150,6 @@
+ 				MTL_ENABLE_DEBUG_INFO = NO;
+ 				OTHER_CFLAGS = "-DBOM_SUPPORT=1";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SUPPORTED_PLATFORMS = macosx;
+ 				TOOLCHAINS = default;
+ 				USER_HEADER_SEARCH_PATHS = "../launch-cache/";
+@@ -2206,7 +2206,6 @@
+ 				ONLY_ACTIVE_ARCH = YES;
+ 				OTHER_CFLAGS = "-DBOM_SUPPORT=1";
+ 				PRODUCT_NAME = multi_dyld_shared_cache_builder;
+-				SDKROOT = macosx.internal;
+ 				STRIP_INSTALLED_PRODUCT = NO;
+ 				USER_HEADER_SEARCH_PATHS = "../launch-cache/";
+ 				VALID_ARCHS = "x86_64 x86_64h";
+@@ -2255,7 +2254,6 @@
+ 				MTL_ENABLE_DEBUG_INFO = NO;
+ 				OTHER_CFLAGS = "-DBOM_SUPPORT=1";
+ 				PRODUCT_NAME = multi_dyld_shared_cache_builder;
+-				SDKROOT = macosx.internal;
+ 				STRIP_INSTALLED_PRODUCT = NO;
+ 				USER_HEADER_SEARCH_PATHS = "../launch-cache/";
+ 				VALID_ARCHS = "x86_64 x86_64h";
+@@ -2339,7 +2337,6 @@
+ 				MTL_ENABLE_DEBUG_INFO = YES;
+ 				OTHER_LDFLAGS = "-nostdlib";
+ 				PRODUCT_NAME = closured;
+-				SDKROOT = macosx;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Debug;
+@@ -2378,7 +2375,6 @@
+ 				MTL_ENABLE_DEBUG_INFO = NO;
+ 				OTHER_LDFLAGS = "-nostdlib";
+ 				PRODUCT_NAME = closured;
+-				SDKROOT = macosx;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Release;
+@@ -2420,7 +2416,6 @@
+ 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+ 				OTHER_LDFLAGS = "-stdlib=libc++";
+ 				PRODUCT_NAME = update_dyld_shared_cache;
+-				SDKROOT = macosx.internal;
+ 				USE_HEADERMAP = NO;
+ 				VALID_ARCHS = x86_64;
+ 			};
+@@ -2460,7 +2455,6 @@
+ 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+ 				OTHER_LDFLAGS = "-stdlib=libc++";
+ 				PRODUCT_NAME = update_dyld_shared_cache;
+-				SDKROOT = macosx.internal;
+ 				STRIP_INSTALLED_PRODUCT = YES;
+ 				STRIP_STYLE = debugging;
+ 				USE_HEADERMAP = NO;
+@@ -2506,7 +2500,6 @@
+ 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+ 				OTHER_LDFLAGS = "-stdlib=libc++";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SIMULATOR_DIR_NAME = "$(PLATFORM_FAMILY_NAME_$(DEVICE_PLATFORM_NAME)) $(IPHONE_SDK_MARKETING_VERSION)";
+ 				USE_HEADERMAP = NO;
+ 				VALID_ARCHS = x86_64;
+@@ -2546,7 +2539,6 @@
+ 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+ 				OTHER_LDFLAGS = "-stdlib=libc++";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SIMULATOR_DIR_NAME = "$(PLATFORM_FAMILY_NAME_$(DEVICE_PLATFORM_NAME)) $(IPHONE_SDK_MARKETING_VERSION)";
+ 				STRIP_INSTALLED_PRODUCT = YES;
+ 				STRIP_STYLE = debugging;
+@@ -2590,7 +2582,6 @@
+ 				MTL_ENABLE_DEBUG_INFO = YES;
+ 				ONLY_ACTIVE_ARCH = YES;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Debug;
+ 		};
+@@ -2621,7 +2612,6 @@
+ 				INSTALL_PATH = "$(INSTALL_LOCATION)/usr/local/bin";
+ 				MTL_ENABLE_DEBUG_INFO = NO;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Release;
+ 		};
+@@ -2668,7 +2658,6 @@
+ 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+ 				MTL_ENABLE_DEBUG_INFO = YES;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Debug;
+ 		};
+@@ -2710,7 +2699,6 @@
+ 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+ 				MTL_ENABLE_DEBUG_INFO = NO;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				VERSIONING_SYSTEM = "apple-generic";
+ 			};
+ 			name = Release;
+@@ -2732,7 +2720,6 @@
+ 				);
+ 				INSTALL_PATH = "$(INSTALL_LOCATION)/usr/local/bin";
+ 				PRODUCT_NAME = dyld_shared_cache_util;
+-				SDKROOT = macosx.internal;
+ 				SUPPORTED_PLATFORMS = macosx;
+ 			};
+ 			name = Debug;
+@@ -2753,7 +2740,6 @@
+ 				);
+ 				INSTALL_PATH = "$(INSTALL_LOCATION)/usr/local/bin";
+ 				PRODUCT_NAME = dyld_shared_cache_util;
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = NO;
+ 				SUPPORTED_PLATFORMS = macosx;
+ 			};
+@@ -2806,7 +2792,6 @@
+ 					"-Wl,-no_inits",
+ 				);
+ 				PRODUCT_NAME = closured;
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Debug;
+ 		};
+@@ -2851,7 +2836,6 @@
+ 					"-Wl,-no_inits",
+ 				);
+ 				PRODUCT_NAME = closured;
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Release;
+ 		};
+@@ -3049,7 +3033,7 @@
+ 				INSTALLHDRS_COPY_PHASE = YES;
+ 				INSTALLHDRS_SCRIPT_PHASE = YES;
+ 				ONLY_ACTIVE_ARCH = NO;
+-				OTHER_CFLAGS = "";
++				OTHER_CFLAGS = "-F$(RC_BuildRoot)/System/Library/Frameworks";
+ 				OTHER_CPLUSPLUSFLAGS = (
+ 					"$(OTHER_CFLAGS)",
+ 					"-Wglobal-constructors",
+@@ -3068,6 +3052,7 @@
+ 				PUBLIC_HEADERS_FOLDER_PATH = "/usr//include/mach-o";
+ 				SKIP_INSTALL = NO;
+ 				SUPPORTS_TEXT_BASED_API = YES;
++				SYSTEM_HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/include $(RC_BuildRoot)/usr/local/include";
+ 				TAPI_VERIFY_MODE = Pedantic;
+ 				VERSIONING_SYSTEM = "apple-generic";
+ 				VERSION_INFO_EXPORT_DECL = "__attribute__((visibility(\"default\")))";
+@@ -3106,7 +3091,7 @@
+ 				HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
+ 				INSTALLHDRS_COPY_PHASE = YES;
+ 				INSTALLHDRS_SCRIPT_PHASE = YES;
+-				OTHER_CFLAGS = "";
++				OTHER_CFLAGS = "-F$(RC_BuildRoot)/System/Library/Frameworks";
+ 				OTHER_CPLUSPLUSFLAGS = (
+ 					"-fno-exceptions",
+ 					"$(OTHER_CFLAGS)",
+@@ -3145,6 +3130,7 @@
+ 				SKIP_INSTALL = NO;
+ 				STRIP_INSTALLED_PRODUCT = YES;
+ 				SUPPORTS_TEXT_BASED_API = YES;
++				SYSTEM_HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/include $(RC_BuildRoot)/usr/local/include";
+ 				TAPI_VERIFY_MODE = Pedantic;
+ 				VERSIONING_SYSTEM = "apple-generic";
+ 				VERSION_INFO_EXPORT_DECL = "__attribute__((visibility(\"default\")))";
+@@ -3197,7 +3183,6 @@
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+ 				ONLY_ACTIVE_ARCH = YES;
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Debug;
+ 		};
+@@ -3227,7 +3212,6 @@
+ 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Release;
+ 		};
