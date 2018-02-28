@@ -308,6 +308,13 @@
 			<key>version</key>
 			<string>1244.1.7</string>
 		</dict>
+		<key>Libcompiler_rt</key>
+		<dict>
+			<key>version</key>
+			<string>5.0.0.0.1</string>
+			<key>github</key>
+			<string>Andromeda-OS/Libcompiler_rt</string>
+		</dict>
 		<key>Libinfo</key>
 		<dict>
 			<key>version</key>
@@ -905,6 +912,7 @@
 				<key>build</key>
 				<array>
 					<string>libdyld</string>
+					<string>Libcompiler_rt</string>
 				</array>
 			</dict>
 		</dict>
