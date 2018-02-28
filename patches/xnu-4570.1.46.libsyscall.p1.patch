@@ -1,0 +1,258 @@
+commit 02d8e0caeeb9e00c94b5851101d917d8240b4477
+Author: William Kent <wjk@users.noreply.github.com>
+Date:   Fri Feb 16 19:00:51 2018 -0500
+
+    Apply xnu-4570.41.2.libsyscall.p1.patch
+
+diff --git a/Makefile b/Makefile
+index fa9f391..b84f079 100644
+--- a/Makefile
++++ b/Makefile
+@@ -40,15 +40,17 @@ default: install
+ 
+ # default to OS X
+ SDKROOT ?= macosx.internal
++RC_BuildRoot ?= /
+ 
+ installhdrs install:
+ 	cd libsyscall ; \
+ 		xcodebuild $@ $(TARGET)	\
+-			"SRCROOT=$(SRCROOT)/libsyscall"					\
+-			"OBJROOT=$(OBJROOT)"						\
+-			"SYMROOT=$(SYMROOT)"						\
+-			"DSTROOT=$(DSTROOT)"						\
+-			"SDKROOT=$(SDKROOT)"
++			"SRCROOT=$(SRCROOT)/libsyscall"	\
++			"OBJROOT=$(OBJROOT)" \
++			"SYMROOT=$(SYMROOT)" \
++			"DSTROOT=$(DSTROOT)" \
++			"SDKROOT=$(SDKROOT)" \
++			"ADDITIONAL_SDKS=$(RC_BuildRoot)"
+ 
+ clean:
+ 
+diff --git a/libsyscall/Libsyscall.xcconfig b/libsyscall/Libsyscall.xcconfig
+index 1055719..5c90ba7 100644
+--- a/libsyscall/Libsyscall.xcconfig
++++ b/libsyscall/Libsyscall.xcconfig
+@@ -28,7 +28,7 @@ GCC_TREAT_WARNINGS_AS_ERRORS = YES
+ GCC_WARN_ABOUT_MISSING_NEWLINE = YES
+ CODE_SIGN_IDENTITY = -
+ DYLIB_CURRENT_VERSION = $(RC_ProjectSourceVersion)
+-DYLIB_LDFLAGS = -umbrella System -all_load -lCrashReporterClient
++DYLIB_LDFLAGS = -umbrella System -all_load // -lCrashReporterClient
+ DYLIB_LDFLAGS[sdk=iphoneos*] = $(inherited) -Wl,-sectalign,__DATA,__data,1000
+ DYLIB_LDFLAGS[sdk=watchos*] = $(inherited) -Wl,-sectalign,__DATA,__data,1000
+ DYLIB_LDFLAGS[sdk=tvos*] = $(inherited) -Wl,-sectalign,__DATA,__data,1000
+diff --git a/libsyscall/Libsyscall.xcodeproj/project.pbxproj b/libsyscall/Libsyscall.xcodeproj/project.pbxproj
+index d0053b2..a3d9fb2 100644
+--- a/libsyscall/Libsyscall.xcodeproj/project.pbxproj
++++ b/libsyscall/Libsyscall.xcodeproj/project.pbxproj
+@@ -23,7 +23,7 @@
+ 			isa = PBXAggregateTarget;
+ 			buildConfigurationList = 249C61191194756B00ED73F3 /* Build configuration list for PBXAggregateTarget "Build" */;
+ 			buildPhases = (
+-				BAFE90DF1C3A4D7B0012084F /* CopyFiles */,
++				BAFE90DF1C3A4D7B0012084F /* Copy Files */,
+ 				BAFE90E11C3A4D9E0012084F /* CopyFiles */,
+ 				BAA2D2FB1C3B2CD90049DCBE /* CopyFiles */,
+ 			);
+@@ -110,13 +110,6 @@
+ 		3695DCC91F3D2C5F0072C0B3 /* reboot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3695DCC81F3D2C5A0072C0B3 /* reboot.c */; };
+ 		374A36E314748F1300AAF39D /* varargs_wrappers.s in Sources */ = {isa = PBXBuildFile; fileRef = 374A36E214748EE400AAF39D /* varargs_wrappers.s */; };
+ 		3F538F891A659C5600B37EFD /* persona.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F538F881A659C5600B37EFD /* persona.c */; };
+-		401BB71A1BCAE57B005080D3 /* os_channel.c in Sources */ = {isa = PBXBuildFile; fileRef = 401BB7161BCAE539005080D3 /* os_channel.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
+-		401BB71C1BCAE57B005080D3 /* os_nexus.c in Sources */ = {isa = PBXBuildFile; fileRef = 401BB7181BCAE539005080D3 /* os_nexus.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
+-		402AF43F1E5CD88600F1A4B9 /* cpu_in_cksum_gen.c in Sources */ = {isa = PBXBuildFile; fileRef = 402AF43E1E5CD88100F1A4B9 /* cpu_in_cksum_gen.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
+-		403C7CEE1E1F4E4400D6FEEF /* os_packet.c in Sources */ = {isa = PBXBuildFile; fileRef = 405FA3381E0C669D007D66EA /* os_packet.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
+-		406E0B721E4ACD2000295EA3 /* cpu_copy_in_cksum.s in Sources */ = {isa = PBXBuildFile; fileRef = 40DD162F1E4ACCAA003297CC /* cpu_copy_in_cksum.s */; };
+-		409A78321E4EB3E300E0699B /* cpu_in_cksum.s in Sources */ = {isa = PBXBuildFile; fileRef = 409A78301E4EB3D900E0699B /* cpu_in_cksum.s */; };
+-		40DF0F741E5CD7BB0035A864 /* cpu_copy_in_cksum_gen.c in Sources */ = {isa = PBXBuildFile; fileRef = 40DF0F731E5CD7B30035A864 /* cpu_copy_in_cksum_gen.c */; settings = {COMPILER_FLAGS = "-fno-builtin"; }; };
+ 		435F3CAA1B06B7BA005ED9EF /* work_interval.c in Sources */ = {isa = PBXBuildFile; fileRef = 435F3CA91B06B7BA005ED9EF /* work_interval.c */; };
+ 		467DAFD4157E8AF200CE68F0 /* guarded_open_np.c in Sources */ = {isa = PBXBuildFile; fileRef = 467DAFD3157E8AF200CE68F0 /* guarded_open_np.c */; };
+ 		4BDD5F1D1891AB2F004BF300 /* mach_approximate_time.c in Sources */ = {isa = PBXBuildFile; fileRef = 4BDD5F1B1891AB2F004BF300 /* mach_approximate_time.c */; };
+@@ -138,10 +131,6 @@
+ 		978228281B8678DC008385AC /* pselect-darwinext.c in Sources */ = {isa = PBXBuildFile; fileRef = 978228271B8678CB008385AC /* pselect-darwinext.c */; };
+ 		978228291B8678DF008385AC /* pselect-darwinext-cancel.c in Sources */ = {isa = PBXBuildFile; fileRef = 978228261B8678C2008385AC /* pselect-darwinext-cancel.c */; };
+ 		9CCF28271E68E993002EE6CD /* pid_shutdown_networking.c in Sources */ = {isa = PBXBuildFile; fileRef = 9CCF28261E68E993002EE6CD /* pid_shutdown_networking.c */; };
+-		A50845861DDA69AC0041C0E0 /* thread_self_restrict.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BD52E1DDA548F006622C8 /* thread_self_restrict.h */; };
+-		A50845871DDA69C90041C0E0 /* thread_self_restrict.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BD52E1DDA548F006622C8 /* thread_self_restrict.h */; };
+-		A50BD52F1DDA548F006622C8 /* thread_self_restrict.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BD52E1DDA548F006622C8 /* thread_self_restrict.h */; };
+-		A50BD5301DDA5500006622C8 /* thread_self_restrict.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BD52E1DDA548F006622C8 /* thread_self_restrict.h */; };
+ 		A59CB95616669EFB00B064B3 /* stack_logging_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = A59CB95516669DB700B064B3 /* stack_logging_internal.h */; };
+ 		A59CB9581666A1A200B064B3 /* munmap.c in Sources */ = {isa = PBXBuildFile; fileRef = A59CB9571666A1A200B064B3 /* munmap.c */; };
+ 		BA0D9FB1199031AD007E8A73 /* kdebug_trace.c in Sources */ = {isa = PBXBuildFile; fileRef = BA0D9FB0199031AD007E8A73 /* kdebug_trace.c */; };
+@@ -155,7 +144,7 @@
+ 		BAA2D2FC1C3B2CE90049DCBE /* libsystem_kernel.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libsystem_kernel.a */; };
+ 		BABA36CB1A856C4700BBBCF7 /* host.c in Sources */ = {isa = PBXBuildFile; fileRef = BABA36CA1A856C4700BBBCF7 /* host.c */; };
+ 		BAFE90DE1C3A4D2D0012084F /* _libkernel_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 247A08B311F8B05900E4693F /* _libkernel_init.c */; };
+-		BAFE90E01C3A4D960012084F /* libsystem_kernel.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libsystem_kernel.a */; };
++		BAFE90E01C3A4D960012084F /* libsystem_kernel.a in Copy Files */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libsystem_kernel.a */; };
+ 		BAFE90E21C3A4DB00012084F /* libsystem_kernel.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libsystem_kernel.a */; };
+ 		C639F0E51741C25800A39F47 /* gethostuuid.h in Headers */ = {isa = PBXBuildFile; fileRef = C639F0E41741C09A00A39F47 /* gethostuuid.h */; settings = {ATTRIBUTES = (Public, ); }; };
+ 		C6460B7C182025DF00F73CCA /* sfi.c in Sources */ = {isa = PBXBuildFile; fileRef = C6460B7B182025DF00F73CCA /* sfi.c */; };
+@@ -362,14 +351,15 @@
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 1;
+ 		};
+-		BAFE90DF1C3A4D7B0012084F /* CopyFiles */ = {
++		BAFE90DF1C3A4D7B0012084F /* Copy Files */ = {
+ 			isa = PBXCopyFilesBuildPhase;
+ 			buildActionMask = 8;
+ 			dstPath = /usr/local/lib/dyld_stub;
+ 			dstSubfolderSpec = 0;
+ 			files = (
+-				BAFE90E01C3A4D960012084F /* libsystem_kernel.a in CopyFiles */,
++				BAFE90E01C3A4D960012084F /* libsystem_kernel.a in Copy Files */,
+ 			);
++			name = "Copy Files";
+ 			runOnlyForDeploymentPostprocessing = 1;
+ 		};
+ 		BAFE90E11C3A4D9E0012084F /* CopyFiles */ = {
+@@ -388,7 +378,6 @@
+ 			dstPath = "$(OS_PRIVATE_HEADERS_FOLDER_PATH)";
+ 			dstSubfolderSpec = 0;
+ 			files = (
+-				A50845871DDA69C90041C0E0 /* thread_self_restrict.h in CopyFiles */,
+ 				C9FD8508166D6BD400963B73 /* tsd.h in CopyFiles */,
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 1;
+@@ -399,7 +388,6 @@
+ 			dstPath = "$(OS_PRIVATE_HEADERS_FOLDER_PATH)";
+ 			dstSubfolderSpec = 0;
+ 			files = (
+-				A50845861DDA69AC0041C0E0 /* thread_self_restrict.h in CopyFiles */,
+ 				C9A3D6EB1672AD1000A5CAA3 /* tsd.h in CopyFiles */,
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 1;
+@@ -1080,7 +1068,6 @@
+ 				C6D3EFBC16542C510052CF30 /* mach_interface.h in Headers */,
+ 				C6D3EFBD16542C510052CF30 /* port_obj.h in Headers */,
+ 				C6D3EFBE16542C510052CF30 /* sync.h in Headers */,
+-				A50BD52F1DDA548F006622C8 /* thread_self_restrict.h in Headers */,
+ 				C6D3EFC116542C510052CF30 /* vm_task.h in Headers */,
+ 				C6D3EFC216542C510052CF30 /* key_defs.h in Headers */,
+ 				C6D3EFC316542C510052CF30 /* ls_defs.h in Headers */,
+@@ -1115,7 +1102,6 @@
+ 				C9D9BD29114B00600000D8B9 /* mach_interface.h in Headers */,
+ 				C9D9BD2B114B00600000D8B9 /* port_obj.h in Headers */,
+ 				C9D9BD2C114B00600000D8B9 /* sync.h in Headers */,
+-				A50BD5301DDA5500006622C8 /* thread_self_restrict.h in Headers */,
+ 				C9D9BD2F114B00600000D8B9 /* vm_task.h in Headers */,
+ 				C9D9BD50114B00600000D8B9 /* key_defs.h in Headers */,
+ 				C9D9BD51114B00600000D8B9 /* ls_defs.h in Headers */,
+@@ -1304,14 +1290,12 @@
+ 			isa = PBXSourcesBuildPhase;
+ 			buildActionMask = 2147483647;
+ 			files = (
+-				403C7CEE1E1F4E4400D6FEEF /* os_packet.c in Sources */,
+ 				E214BDC81C2E358300CEE8A3 /* clonefile.c in Sources */,
+ 				C9D9BD19114B00600000D8B9 /* clock_priv.defs in Sources */,
+ 				C9D9BD1A114B00600000D8B9 /* clock_reply.defs in Sources */,
+ 				C9D9BD1C114B00600000D8B9 /* clock.defs in Sources */,
+ 				C9D9BD22114B00600000D8B9 /* exc.defs in Sources */,
+ 				C9D9BD30114B00600000D8B9 /* host_priv.defs in Sources */,
+-				409A78321E4EB3E300E0699B /* cpu_in_cksum.s in Sources */,
+ 				C9D9BD31114B00600000D8B9 /* host_security.defs in Sources */,
+ 				C9D9BD35114B00600000D8B9 /* lock_set.defs in Sources */,
+ 				C9D9BD38114B00600000D8B9 /* mach_host.defs in Sources */,
+@@ -1393,7 +1377,6 @@
+ 				248BA069121D9E27008C073F /* getrlimit.c in Sources */,
+ 				C6460B7C182025DF00F73CCA /* sfi.c in Sources */,
+ 				248BA080121DA36B008C073F /* ioctl.c in Sources */,
+-				401BB71A1BCAE57B005080D3 /* os_channel.c in Sources */,
+ 				C6BEE9181806840200D25AAB /* posix_sem_obsolete.c in Sources */,
+ 				248BA082121DA4F3008C073F /* kill.c in Sources */,
+ 				248BA085121DA5E4008C073F /* kill.c in Sources */,
+@@ -1415,7 +1398,6 @@
+ 				248BA0BE121DE902008C073F /* select.c in Sources */,
+ 				248BA0CD121DEBEF008C073F /* setrlimit.c in Sources */,
+ 				24B223B0121DFD36007DAEDE /* sigsuspend.c in Sources */,
+-				401BB71C1BCAE57B005080D3 /* os_nexus.c in Sources */,
+ 				24B223B2121DFE6D007DAEDE /* sigsuspend-cancel.c in Sources */,
+ 				E4216C311822D404006F2632 /* mach_voucher.defs in Sources */,
+ 				24B223B5121DFF29007DAEDE /* sigsuspend.c in Sources */,
+@@ -1423,13 +1405,10 @@
+ 				248AA965122C7C330085F5B1 /* rmdir.c in Sources */,
+ 				435F3CAA1B06B7BA005ED9EF /* work_interval.c in Sources */,
+ 				248AA967122C7CDA0085F5B1 /* rename.c in Sources */,
+-				406E0B721E4ACD2000295EA3 /* cpu_copy_in_cksum.s in Sources */,
+ 				24B8C2621237F53900D36CC3 /* remove-counter.c in Sources */,
+ 				C99A4F501305B2BD0054B7B7 /* __get_cpu_capabilities.s in Sources */,
+ 				978228291B8678DF008385AC /* pselect-darwinext-cancel.c in Sources */,
+-				40DF0F741E5CD7BB0035A864 /* cpu_copy_in_cksum_gen.c in Sources */,
+ 				C99A4F531305B43F0054B7B7 /* init_cpu_capabilities.c in Sources */,
+-				402AF43F1E5CD88600F1A4B9 /* cpu_in_cksum_gen.c in Sources */,
+ 				030B179B135377B400DAD1F0 /* open_dprotected_np.c in Sources */,
+ 				E4D45C3116F868ED0002AF25 /* proc_listpidspath.c in Sources */,
+ 				374A36E314748F1300AAF39D /* varargs_wrappers.s in Sources */,
+@@ -1489,6 +1468,7 @@
+ 			isa = XCBuildConfiguration;
+ 			baseConfigurationReference = C9D9BE0F114FFADC0000D8B9 /* Libsyscall.xcconfig */;
+ 			buildSettings = {
++				ADDITIONAL_SDKS = "$(RC_BuildRoot)";
+ 				GCC_C_LANGUAGE_STANDARD = gnu99;
+ 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+ 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+diff --git a/libsyscall/os/thread_self_restrict.h b/libsyscall/os/thread_self_restrict.h
+new file mode 100644
+index 0000000..a34fc05
+--- /dev/null
++++ b/libsyscall/os/thread_self_restrict.h
+@@ -0,0 +1,29 @@
++/*
++ * Copyright (c) 2018 PureDarwin Project. All rights reserved.
++ *
++ * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
++ *
++ * This file contains Original Code and/or Modifications of Original Code
++ * as defined in and that are subject to the Apple Public Source License
++ * Version 2.0 (the 'License'). You may not use this file except in
++ * compliance with the License. The rights granted to you under the License
++ * may not be used to create, or enable the creation or redistribution of,
++ * unlawful or unlicensed copies of an Apple operating system, or to
++ * circumvent, violate, or enable the circumvention or violation of, any
++ * terms of an Apple operating system software license agreement.
++ *
++ * Please obtain a copy of the License at
++ * http://www.opensource.apple.com/apsl/ and read it before using this file.
++ *
++ * The Original Code and all software distributed under the License are
++ * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
++ * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
++ * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
++ * Please see the License for the specific language governing rights and
++ * limitations under the License.
++ *
++ * @APPLE_OSREFERENCE_LICENSE_HEADER_END@
++ */
++
++// This file intentionally left blank.
+diff --git a/libsyscall/xcodescripts/compile-syscalls.pl b/libsyscall/xcodescripts/compile-syscalls.pl
+index f0c2691..e9ff30e 100755
+--- a/libsyscall/xcodescripts/compile-syscalls.pl
++++ b/libsyscall/xcodescripts/compile-syscalls.pl
+@@ -63,7 +63,10 @@ my @CFLAGS = (
+ 	"-x assembler-with-cpp",
+ 	"-c",
+ 	"-isysroot", $ENV{'SDKROOT'} || "/",
++	"-isysroot", $ENV{'ADDITIONAL_SDKS'} || "/",
+ 	"-I".$ENV{"SDKROOT"}."/System/Library/Frameworks/System.framework/PrivateHeaders",
++	"-I".$ENV{"ADDITIONAL_SDKS"}."/System/Library/Frameworks/System.framework/PrivateHeaders",
++	"-I".$ENV{"ADDITIONAL_SDKS"}."/System/Library/Frameworks/Kernel.framework/PrivateHeaders",
+ );
+ 
+ chomp(my $LIBTOOL = `xcrun -sdk "$ENV{'SDKROOT'}" -find libtool`);
+diff --git a/osfmk/i386/cpu_topology.c b/osfmk/i386/cpu_topology.c
+index e079e6e..6f6baf7 100644
+--- a/osfmk/i386/cpu_topology.c
++++ b/osfmk/i386/cpu_topology.c
+@@ -37,6 +37,7 @@
+ #include <i386/cpu_data.h>
+ #include <i386/lapic.h>
+ #include <i386/machine_routines.h>
++#include <stddef.h>
+ 
+ __private_extern__ void qsort(
+     void * array,
