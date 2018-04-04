@@ -888,7 +888,7 @@
 		<key>libutil</key>
 		<dict>
 			<key>version</key>
-			<string>51</string>
+			<string>51.20.1</string>
 		</dict>
 		<key>libxml2</key>
 		<dict>
