@@ -1,0 +1,114 @@
+diff --git a/hfs.xcodeproj/project.pbxproj b/hfs.xcodeproj/project.pbxproj
+index 9ec964f..a840760 100644
+--- a/hfs.xcodeproj/project.pbxproj
++++ b/hfs.xcodeproj/project.pbxproj
+@@ -105,7 +105,6 @@
+ 			buildConfigurationList = FBAA82661B56F2AB00EE6863 /* Build configuration list for PBXAggregateTarget "osx-tests" */;
+ 			buildPhases = (
+ 				FBAA82711B56F65800EE6863 /* Run local tests */,
+-				FB55AE5C1B7D193B00701D03 /* Create BATS plist */,
+ 			);
+ 			dependencies = (
+ 				FB55AE5B1B7D190F00701D03 /* PBXTargetDependency */,
+@@ -147,6 +146,7 @@
+ 		0703A0541CD826160035BCFD /* test-defrag.c in Sources */ = {isa = PBXBuildFile; fileRef = 0703A0531CD826160035BCFD /* test-defrag.c */; };
+ 		07C2BF891CB43F5E00D8327D /* test-renamex.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C2BF881CB43F5E00D8327D /* test-renamex.c */; };
+ 		09D6B7D71E317ED2003C20DC /* test_disklevel.c in Sources */ = {isa = PBXBuildFile; fileRef = 09D6B7D61E317ED2003C20DC /* test_disklevel.c */; };
++		1F0142E720755890008362B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0142E620755890008362B5 /* Foundation.framework */; };
+ 		2A386A3B1C22209C007FEDAC /* test-list-ids.c in Sources */ = {isa = PBXBuildFile; fileRef = 2A386A3A1C221E67007FEDAC /* test-list-ids.c */; };
+ 		2A84DBD41D9E15F2007964B8 /* test-raw-dev-unaligned.c in Sources */ = {isa = PBXBuildFile; fileRef = 2A84DBD31D9E1179007964B8 /* test-raw-dev-unaligned.c */; };
+ 		2A9399951BDFEB5200FB075B /* test-access.c in Sources */ = {isa = PBXBuildFile; fileRef = 2A9399941BDFEA6E00FB075B /* test-access.c */; };
+@@ -738,6 +738,7 @@
+ 		0703A0531CD826160035BCFD /* test-defrag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-defrag.c"; sourceTree = "<group>"; };
+ 		07C2BF881CB43F5E00D8327D /* test-renamex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-renamex.c"; sourceTree = "<group>"; };
+ 		09D6B7D61E317ED2003C20DC /* test_disklevel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test_disklevel.c; sourceTree = "<group>"; };
++		1F0142E620755890008362B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+ 		2A386A3A1C221E67007FEDAC /* test-list-ids.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-list-ids.c"; sourceTree = "<group>"; };
+ 		2A84DBD31D9E1179007964B8 /* test-raw-dev-unaligned.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-raw-dev-unaligned.c"; sourceTree = "<group>"; };
+ 		2A9399941BDFEA6E00FB075B /* test-access.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "test-access.c"; sourceTree = "<group>"; };
+@@ -1087,6 +1088,7 @@
+ 			isa = PBXFrameworksBuildPhase;
+ 			buildActionMask = 2147483647;
+ 			files = (
++				1F0142E720755890008362B5 /* Foundation.framework in Frameworks */,
+ 			);
+ 			runOnlyForDeploymentPostprocessing = 0;
+ 		};
+@@ -1513,6 +1515,7 @@
+ 		FDD9FA4014A133A50043D4A9 /* Frameworks */ = {
+ 			isa = PBXGroup;
+ 			children = (
++				1F0142E620755890008362B5 /* Foundation.framework */,
+ 				C1B6FA2210CC0AF400778D48 /* CoreFoundation.framework */,
+ 				4DE6C7461535012200C11066 /* IOKit.framework */,
+ 				FDD9FA5B14A135840043D4A9 /* libz.dylib */,
+@@ -2175,24 +2178,6 @@
+ 			shellScript = "DIR=\"$DSTROOT/System/Library/Frameworks/System.framework/Versions/B/PrivateHeaders/hfs\"\nmkdir -p \"$DIR\"\ncp \"$DSTROOT/usr/local/include/hfs/hfs_fsctl.h\" \"$DIR\"\n";
+ 			showEnvVarsInLog = 0;
+ 		};
+-		FB55AE5C1B7D193B00701D03 /* Create BATS plist */ = {
+-			isa = PBXShellScriptBuildPhase;
+-			buildActionMask = 12;
+-			files = (
+-			);
+-			inputPaths = (
+-				"$(SRCROOT)/tests/gen-test-plist.sh",
+-				"$(BUILT_PRODUCTS_DIR)/hfs-tests",
+-			);
+-			name = "Create BATS plist";
+-			outputPaths = (
+-				"$(INSTALL_ROOT)/AppleInternal/CoreOS/BATS/unit_tests/hfs.plist",
+-			);
+-			runOnlyForDeploymentPostprocessing = 0;
+-			shellPath = /bin/sh;
+-			shellScript = "\"$SCRIPT_INPUT_FILE_0\" \"$SCRIPT_OUTPUT_FILE_0\"";
+-			showEnvVarsInLog = 0;
+-		};
+ 		FB55AE6F1B7D47B300701D03 /* Create BATS plist */ = {
+ 			isa = PBXShellScriptBuildPhase;
+ 			buildActionMask = 12;
+@@ -3380,6 +3365,7 @@
+ 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/System.framework/PrivateHeaders";
+ 				INSTALL_PATH = /AppleInternal/CoreOS/tests/hfs;
+ 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+ 				MTL_ENABLE_DEBUG_INFO = NO;
+@@ -3435,6 +3421,7 @@
+ 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/System.framework/PrivateHeaders";
+ 				INSTALL_PATH = /AppleInternal/CoreOS/tests/hfs;
+ 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+ 				MTL_ENABLE_DEBUG_INFO = YES;
+@@ -4599,6 +4586,7 @@
+ 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/System.framework/PrivateHeaders";
+ 				INSTALL_PATH = /AppleInternal/CoreOS/tests/hfs;
+ 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+ 				MTL_ENABLE_DEBUG_INFO = YES;
+@@ -4715,6 +4703,7 @@
+ 				07828B5C1E3FDD25009D2106 /* Coverage */,
+ 			);
+ 			defaultConfigurationIsVisible = 0;
++			defaultConfigurationName = Release;
+ 		};
+ 		1DEB928508733DD80010E9CD /* Build configuration list for PBXNativeTarget "hfs.util" */ = {
+ 			isa = XCConfigurationList;
+diff --git a/tests/cases/test-hard-links.m b/tests/cases/test-hard-links.m
+index 5702561..b8d3bfd 100644
+--- a/tests/cases/test-hard-links.m
++++ b/tests/cases/test-hard-links.m
+@@ -5,7 +5,7 @@
+ #include <stdio.h>
+ #include <pthread.h>
+ #include <sys/mount.h>
+-#include <System/sys/fsgetpath.h>
++#include <sys/fsgetpath.h>
+ #include <TargetConditionals.h>
+ #include <spawn.h>
+ #import <Foundation/Foundation.h>

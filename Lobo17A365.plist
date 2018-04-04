@@ -735,6 +735,20 @@
 		<dict>
 			<key>version</key>
 			<string>407.1.3</string>
+			<key>patchfiles</key>
+			<array>
+				<string>hfs-407.1.3.fix-tests.p1.patch</string>
+				<string>hfs-407.1.3.fix-build.p1.patch</string>
+				<string>hfs-407.1.3.skip-test-install.p1.patch</string>
+			</array>
+			<key>dependencies</key>
+			<dict>
+				<key>header</key>
+				<array>
+					<string>libutil</string>
+					<string>xnu_headers</string>
+				</array>
+			</dict>
 		</dict>
 		<key>hunspell</key>
 		<dict>

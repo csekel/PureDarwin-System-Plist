@@ -1,0 +1,475 @@
+diff --git a/CopyHFSMeta/SparseBundle.c b/CopyHFSMeta/SparseBundle.c
+index 2d966c4..2862a83 100644
+--- a/CopyHFSMeta/SparseBundle.c
++++ b/CopyHFSMeta/SparseBundle.c
+@@ -11,7 +11,7 @@
+ #include <removefile.h>
+ 
+ #include <CoreFoundation/CoreFoundation.h>
+-#include <System/sys/fsctl.h> 
++#include <sys/fsctl.h>
+ 
+ #include "hfsmeta.h"
+ #include "Sparse.h"
+diff --git a/core/hfs_iokit.cpp b/core/hfs_iokit.cpp
+index 5908364..762d6a6 100644
+--- a/core/hfs_iokit.cpp
++++ b/core/hfs_iokit.cpp
+@@ -251,6 +251,7 @@ kern_return_t hfs_get_platform_serial_number(char *serial_number_str,
+ 
+ // Interface with AKS
+ 
++#ifndef __PUREDARWIN__
+ static aks_file_system_key_services_t *
+ key_services(void)
+ {
+@@ -305,3 +306,4 @@ int hfs_backup_key(aks_cred_t access, const aks_wrapped_key_t wrapped_key_in,
+ 		return ENXIO;
+ 	return ks->backup_key(access, wrapped_key_in, wrapped_key_out);
+ }
++#endif
+diff --git a/core/hfs_iokit.h b/core/hfs_iokit.h
+index d31a062..73e1ae8 100644
+--- a/core/hfs_iokit.h
++++ b/core/hfs_iokit.h
+@@ -30,7 +30,9 @@
+ #define hfs_iokit_h
+ 
+ #include <sys/cdefs.h>
++#ifndef __PUREDARWIN__
+ #include <AppleKeyStore/AppleKeyStoreFSServices.h>
++#endif
+ 
+ __BEGIN_DECLS
+ 
+@@ -42,6 +44,7 @@ void hfs_iterate_media_with_content(const char *content_uuid_cstring,
+ 									void *arg);
+ kern_return_t hfs_get_platform_serial_number(char *serial_number_str,
+ 											 uint32_t len);
++#ifndef __PUREDARWIN__
+ int hfs_unwrap_key(aks_cred_t access, const aks_wrapped_key_t wrapped_key_in,
+ 				   aks_raw_key_t key_out);
+ int hfs_rewrap_key(aks_cred_t access, cp_key_class_t dp_class,
+@@ -51,6 +54,7 @@ int hfs_new_key(aks_cred_t access, cp_key_class_t dp_class,
+ 				aks_raw_key_t key_out, aks_wrapped_key_t wrapped_key_out);
+ int hfs_backup_key(aks_cred_t access, const aks_wrapped_key_t wrapped_key_in,
+ 				   aks_wrapped_key_t wrapped_key_out);
++#endif
+ 
+ __END_DECLS
+ 
+diff --git a/hfs.xcodeproj/project.pbxproj b/hfs.xcodeproj/project.pbxproj
+index a840760..c61f1d8 100644
+--- a/hfs.xcodeproj/project.pbxproj
++++ b/hfs.xcodeproj/project.pbxproj
+@@ -2780,6 +2780,7 @@
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = hfs_util/hfs_util.ios.entitlements;
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = hfs_util/hfs_util.osx.entitlements;
+ 				CODE_SIGN_IDENTITY = "-";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/System.framework/PrivateHeaders";
+ 				PRODUCT_NAME = hfs.util;
+ 				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+@@ -2790,6 +2791,7 @@
+ 			isa = XCBuildConfiguration;
+ 			baseConfigurationReference = 4DFD953D15377C7D0039B6BA /* hfs.xcconfig */;
+ 			buildSettings = {
++				GCC_PREPROCESSOR_DEFINITIONS = "__PUREDARWIN__=1";
+ 			};
+ 			name = Release;
+ 		};
+@@ -2813,8 +2815,8 @@
+ 				EXCLUDED_SOURCE_FILE_NAMES = "";
+ 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphoneos*]" = optical.c;
+ 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphonesimulator*]" = optical.c;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Release;
+@@ -2851,8 +2853,8 @@
+ 			buildSettings = {
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = newfs_hfs/newfs_hfs.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Release;
+@@ -2868,8 +2870,8 @@
+ 					"CONFIG_HFS_TRIM=1",
+ 					"DEBUG_BUILD=0",
+ 				);
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Release;
+@@ -2880,8 +2882,8 @@
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = newfs_hfs/newfs_hfs.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+ 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG_BUILD=1";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = newfs_hfs_debug;
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Release;
+ 		};
+@@ -2893,6 +2895,7 @@
+ 					"BSD=1",
+ 					"FSCK_MAKESTRINGS=1",
+ 				);
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = fsck_makestrings;
+ 				SKIP_INSTALL = YES;
+ 			};
+@@ -2967,6 +2970,10 @@
+ 				COPY_HEADERS_UNIFDEF_FLAGS = "-UKERNEL";
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				GCC_C_LANGUAGE_STANDARD = gnu99;
++				GCC_PREPROCESSOR_DEFINITIONS = (
++					"$(PREPROC_DEFN_$(CONFIGURATION))",
++					"__PUREDARWIN__=1",
++				);
+ 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+ 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+ 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+@@ -2983,14 +2990,15 @@
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_LABEL = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/Kernel.framework/PrivateHeaders";
+ 				INFOPLIST_FILE = "$(PROJECT_DERIVED_FILE_DIR)/kext-Info.plist";
+ 				INSTALL_MODE_FLAG = "a+rX";
++				INSTALL_PATH = /System/Library/Extensions;
+ 				LLVM_LTO = YES;
+ 				MODULE_NAME = "com.apple.file-systems.hfs.kext";
+ 				MODULE_VERSION = 1.0.0;
+ 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.filesystems.hfs.kext;
+ 				PRODUCT_NAME = HFS;
+-				SDKROOT = macosx.internal;
+ 				WARNING_CFLAGS = (
+ 					"$(inherited)",
+ 					"-Wno-unused-parameter",
+@@ -3295,13 +3303,14 @@
+ 				COMBINE_HIDPI_IMAGES = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				GCC_C_LANGUAGE_STANDARD = gnu99;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/Kernel.framework/PrivateHeaders";
+ 				INFOPLIST_FILE = "$(SRCROOT)/hfs_encodings/HFSEncodings-Info.plist";
+ 				INSTALL_MODE_FLAG = "a+rX";
++				INSTALL_PATH = /System/Library/Extensions;
+ 				MODULE_NAME = "com.apple.file-systems.hfs.kext";
+ 				MODULE_VERSION = 1.0.0;
+ 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.filesystems.hfs.encodings.kext;
+ 				PRODUCT_NAME = HFSEncodings;
+-				SDKROOT = macosx.internal;
+ 				SUPPORTED_PLATFORMS = macosx;
+ 				WRAPPER_EXTENSION = kext;
+ 			};
+@@ -3318,13 +3327,14 @@
+ 				COMBINE_HIDPI_IMAGES = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				GCC_C_LANGUAGE_STANDARD = gnu99;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/Kernel.framework/PrivateHeaders";
+ 				INFOPLIST_FILE = "$(SRCROOT)/hfs_encodings/HFSEncodings-Info.plist";
+ 				INSTALL_MODE_FLAG = "a+rX";
++				INSTALL_PATH = /System/Library/Extensions;
+ 				MODULE_NAME = "com.apple.file-systems.hfs.kext";
+ 				MODULE_VERSION = 1.0.0;
+ 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.filesystems.hfs.encodings.kext;
+ 				PRODUCT_NAME = HFSEncodings;
+-				SDKROOT = macosx.internal;
+ 				SUPPORTED_PLATFORMS = macosx;
+ 				WRAPPER_EXTENSION = kext;
+ 			};
+@@ -3848,6 +3858,7 @@
+ 			baseConfigurationReference = 4DFD953D15377C7D0039B6BA /* hfs.xcconfig */;
+ 			buildSettings = {
+ 				ENABLE_TESTABILITY = YES;
++				GCC_PREPROCESSOR_DEFINITIONS = "__PUREDARWIN__=1";
+ 			};
+ 			name = Debug;
+ 		};
+@@ -3895,6 +3906,7 @@
+ 			buildSettings = {
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = hfs_util/hfs_util.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/System.framework/PrivateHeaders";
+ 				PRODUCT_NAME = hfs.util;
+ 				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+@@ -3906,6 +3918,7 @@
+ 			buildSettings = {
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = CopyHFSMeta/CopyHFSMeta.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/System.framework/PrivateHeaders";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+@@ -3920,8 +3933,8 @@
+ 				EXCLUDED_SOURCE_FILE_NAMES = "";
+ 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphoneos*]" = optical.c;
+ 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphonesimulator*]" = optical.c;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Debug;
+@@ -3931,8 +3944,8 @@
+ 			buildSettings = {
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = newfs_hfs/newfs_hfs.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Debug;
+@@ -3943,8 +3956,8 @@
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = newfs_hfs/newfs_hfs.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+ 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG_BUILD=1";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = newfs_hfs_debug;
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Debug;
+ 		};
+@@ -3958,8 +3971,8 @@
+ 					"CONFIG_HFS_TRIM=1",
+ 					"DEBUG_BUILD=0",
+ 				);
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Debug;
+@@ -3983,6 +3996,7 @@
+ 					"BSD=1",
+ 					"FSCK_MAKESTRINGS=1",
+ 				);
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = fsck_makestrings;
+ 				SKIP_INSTALL = YES;
+ 			};
+@@ -4045,6 +4059,10 @@
+ 				COPY_HEADERS_UNIFDEF_FLAGS = "-UKERNEL";
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				GCC_C_LANGUAGE_STANDARD = gnu99;
++				GCC_PREPROCESSOR_DEFINITIONS = (
++					"$(PREPROC_DEFN_$(CONFIGURATION))",
++					"__PUREDARWIN__=1",
++				);
+ 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+ 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+ 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+@@ -4061,13 +4079,14 @@
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_LABEL = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/Kernel.framework/PrivateHeaders";
+ 				INFOPLIST_FILE = "$(PROJECT_DERIVED_FILE_DIR)/kext-Info.plist";
+ 				INSTALL_MODE_FLAG = "a+rX";
++				INSTALL_PATH = /System/Library/Extensions;
+ 				MODULE_NAME = "com.apple.file-systems.hfs.kext";
+ 				MODULE_VERSION = 1.0.0;
+ 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.filesystems.hfs.kext;
+ 				PRODUCT_NAME = HFS;
+-				SDKROOT = macosx.internal;
+ 				WARNING_CFLAGS = (
+ 					"$(inherited)",
+ 					"-Wno-unused-parameter",
+@@ -4091,6 +4110,7 @@
+ 			baseConfigurationReference = 4DFD953D15377C7D0039B6BA /* hfs.xcconfig */;
+ 			buildSettings = {
+ 				ENABLE_TESTABILITY = YES;
++				GCC_PREPROCESSOR_DEFINITIONS = "__PUREDARWIN__=1";
+ 			};
+ 			name = Coverage;
+ 		};
+@@ -4138,6 +4158,7 @@
+ 			buildSettings = {
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = hfs_util/hfs_util.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/System.framework/PrivateHeaders";
+ 				PRODUCT_NAME = hfs.util;
+ 				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+@@ -4149,6 +4170,7 @@
+ 			buildSettings = {
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = CopyHFSMeta/CopyHFSMeta.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/System.framework/PrivateHeaders";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+@@ -4163,8 +4185,8 @@
+ 				EXCLUDED_SOURCE_FILE_NAMES = "";
+ 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphoneos*]" = optical.c;
+ 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphonesimulator*]" = optical.c;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Coverage;
+@@ -4174,8 +4196,8 @@
+ 			buildSettings = {
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = newfs_hfs/newfs_hfs.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Coverage;
+@@ -4186,8 +4208,8 @@
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = newfs_hfs/newfs_hfs.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
+ 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG_BUILD=1";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = newfs_hfs_debug;
+-				SDKROOT = macosx.internal;
+ 			};
+ 			name = Coverage;
+ 		};
+@@ -4201,8 +4223,8 @@
+ 					"CONFIG_HFS_TRIM=1",
+ 					"DEBUG_BUILD=0",
+ 				);
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+-				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+ 			};
+ 			name = Coverage;
+@@ -4226,6 +4248,7 @@
+ 					"BSD=1",
+ 					"FSCK_MAKESTRINGS=1",
+ 				);
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/usr/local/include";
+ 				PRODUCT_NAME = fsck_makestrings;
+ 				SKIP_INSTALL = YES;
+ 			};
+@@ -4288,6 +4311,10 @@
+ 				COPY_HEADERS_UNIFDEF_FLAGS = "-UKERNEL";
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				GCC_C_LANGUAGE_STANDARD = gnu99;
++				GCC_PREPROCESSOR_DEFINITIONS = (
++					"$(PREPROC_DEFN_$(CONFIGURATION))",
++					"__PUREDARWIN__=1",
++				);
+ 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+ 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+ 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+@@ -4304,13 +4331,14 @@
+ 				GCC_WARN_UNUSED_FUNCTION = YES;
+ 				GCC_WARN_UNUSED_LABEL = YES;
+ 				GCC_WARN_UNUSED_VARIABLE = YES;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/Kernel.framework/PrivateHeaders";
+ 				INFOPLIST_FILE = "$(PROJECT_DERIVED_FILE_DIR)/kext-Info.plist";
+ 				INSTALL_MODE_FLAG = "a+rX";
++				INSTALL_PATH = /System/Library/Extensions;
+ 				MODULE_NAME = "com.apple.file-systems.hfs.kext";
+ 				MODULE_VERSION = 1.0.0;
+ 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.filesystems.hfs.kext;
+ 				PRODUCT_NAME = HFS;
+-				SDKROOT = macosx.internal;
+ 				WARNING_CFLAGS = (
+ 					"$(inherited)",
+ 					"-Wno-unused-parameter",
+@@ -4331,13 +4359,14 @@
+ 				COMBINE_HIDPI_IMAGES = YES;
+ 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+ 				GCC_C_LANGUAGE_STANDARD = gnu99;
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/Kernel.framework/PrivateHeaders";
+ 				INFOPLIST_FILE = "$(SRCROOT)/hfs_encodings/HFSEncodings-Info.plist";
+ 				INSTALL_MODE_FLAG = "a+rX";
++				INSTALL_PATH = /System/Library/Extensions;
+ 				MODULE_NAME = "com.apple.file-systems.hfs.kext";
+ 				MODULE_VERSION = 1.0.0;
+ 				PRODUCT_BUNDLE_IDENTIFIER = com.apple.filesystems.hfs.encodings.kext;
+ 				PRODUCT_NAME = HFSEncodings;
+-				SDKROOT = macosx.internal;
+ 				SUPPORTED_PLATFORMS = macosx;
+ 				WRAPPER_EXTENSION = kext;
+ 			};
+@@ -4686,6 +4715,7 @@
+ 			buildSettings = {
+ 				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = CopyHFSMeta/CopyHFSMeta.entitlements;
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "-";
++				HEADER_SEARCH_PATHS = "$(RC_BuildRoot)/System/Library/Frameworks/System.framework/PrivateHeaders";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SDKROOT = macosx.internal;
+ 				SKIP_INSTALL = YES;
+diff --git a/hfs_util/hfsutil_jnl.c b/hfs_util/hfsutil_jnl.c
+index 0989d5b..4214060 100644
+--- a/hfs_util/hfsutil_jnl.c
++++ b/hfs_util/hfsutil_jnl.c
+@@ -46,7 +46,7 @@
+ 
+ #include "../core/hfs_fsctl.h"
+ 
+-#include <System/sys/content_protection.h>
++#include <sys/content_protection.h>
+ #include <TargetConditionals.h>
+ 
+ #include <errno.h>
+diff --git a/hfs_util/hfsutil_main.c b/hfs_util/hfsutil_main.c
+index 8d86934..078e40b 100644
+--- a/hfs_util/hfsutil_main.c
++++ b/hfs_util/hfsutil_main.c
+@@ -79,7 +79,7 @@
+ #include <CoreFoundation/CFString.h>
+ 
+ #include <uuid/uuid.h>
+-#include <System/uuid/namespace.h>
++UUID_DEFINE( kFSUUIDNamespaceSHA1, 0xB3, 0xE2, 0x0F, 0x39, 0xF2, 0x92, 0x11, 0xD6, 0x97, 0xA4, 0x00, 0x30, 0x65, 0x43, 0xEC, 0xAC );
+ 
+ #define READ_DEFAULT_ENCODING 1
+ 
+diff --git a/tests/cases/test-class-roll.c b/tests/cases/test-class-roll.c
+index df097ab..19a5de8 100644
+--- a/tests/cases/test-class-roll.c
++++ b/tests/cases/test-class-roll.c
+@@ -6,7 +6,7 @@
+ #include <sys/stat.h>
+ #include <sys/mman.h>
+ #include <sys/sysctl.h>
+-#include <System/sys/fsgetpath.h>
++#include <sys/fsgetpath.h>
+ #include <MobileKeyBag/MobileKeyBag.h>
+ #import <Security/SecItemPriv.h>
+ #include <hfs/hfs_fsctl.h>
+diff --git a/tests/cases/test-getattrlist-dprotect.m b/tests/cases/test-getattrlist-dprotect.m
+index 8ee93b3..daf12c8 100644
+--- a/tests/cases/test-getattrlist-dprotect.m
++++ b/tests/cases/test-getattrlist-dprotect.m
+@@ -20,7 +20,7 @@
+ #include <sys/mount.h>
+ #include <sys/mman.h>
+ #include <sys/sysctl.h>
+-#include <System/sys/fsgetpath.h>
++#include <sys/fsgetpath.h>
+ #include <MobileKeyBag/MobileKeyBag.h>
+ #import <Foundation/Foundation.h>
+ #import <Security/SecItemPriv.h>
+diff --git a/tests/cases/test-list-ids.c b/tests/cases/test-list-ids.c
+index 47c8090..91339fc 100644
+--- a/tests/cases/test-list-ids.c
++++ b/tests/cases/test-list-ids.c
+@@ -10,7 +10,7 @@
+ #include <sys/attr.h>
+ #include <sys/stat.h>
+ #include <sys/sysctl.h>
+-#include <System/sys/fsgetpath.h>
++#include <sys/fsgetpath.h>
+ #include <hfs/hfs_fsctl.h>
+ 
+ #include "hfs-tests.h"
