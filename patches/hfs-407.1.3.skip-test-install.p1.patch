@@ -1,0 +1,28 @@
+diff --git a/hfs.xcodeproj/project.pbxproj b/hfs.xcodeproj/project.pbxproj
+index c61f1d8..482082a 100644
+--- a/hfs.xcodeproj/project.pbxproj
++++ b/hfs.xcodeproj/project.pbxproj
+@@ -3382,6 +3382,7 @@
+ 				OTHER_CFLAGS = "-fexceptions";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SDKROOT = iphoneos.internal;
++				SKIP_INSTALL = YES;
+ 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/tests";
+ 				WARNING_CFLAGS = (
+ 					"-Wall",
+@@ -3439,6 +3440,7 @@
+ 				OTHER_CFLAGS = "-fexceptions";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SDKROOT = iphoneos.internal;
++				SKIP_INSTALL = YES;
+ 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/tests";
+ 				WARNING_CFLAGS = (
+ 					"-Wall",
+@@ -4623,6 +4625,7 @@
+ 				OTHER_CFLAGS = "-fexceptions";
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SDKROOT = iphoneos.internal;
++				SKIP_INSTALL = YES;
+ 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/tests";
+ 				WARNING_CFLAGS = (
+ 					"-Wall",
