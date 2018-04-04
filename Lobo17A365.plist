@@ -30,7 +30,7 @@
 		<key>NEXT_ROOT</key>
 		<string></string>
 		<key>RC_ARCHS</key>
-		<string>x86_64 i386</string>
+		<string>x86_64</string>
 		<key>RC_JASPER</key>
 		<string>YES</string>
 		<key>RC_NONARCH_CFLAGS</key>
